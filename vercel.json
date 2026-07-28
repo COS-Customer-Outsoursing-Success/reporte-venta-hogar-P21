@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/Reporte Venta Cruzada Hogar [5116].html"
+    }
+  ]
+}

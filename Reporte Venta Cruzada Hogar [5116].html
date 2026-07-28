@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Claro - Venta Cruzada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --claro-red: #da291c;
+            --claro-red-dark: #b92218;
+            --bg-color: #f8fafc;
+            --panel-bg: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --header-bg: #da291c;
+            --header-text: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding: 20px 24px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border-top: 5px solid var(--claro-red);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            font-size: 1.65rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-tag {
+            background: #fef2f2;
+            color: var(--claro-red);
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid #fecaca;
+        }
+
+        /* KPI Executive Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .kpi-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(218, 41, 28, 0.1), 0 4px 6px -2px rgba(218, 41, 28, 0.05);
+            border-color: #fca5a5;
+        }
+
+        .kpi-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .kpi-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .kpi-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #64748b;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .kpi-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1e293b;
+            line-height: 1.2;
+            margin: 2px 0;
+        }
+
+        .kpi-sub {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .grid-2-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .panel {
+            background-color: var(--panel-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .panel-header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .panel-header.secondary {
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .panel-body {
+            padding: 16px;
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            color: var(--text-muted);
+        }
+
+        .data-value {
+            font-weight: 600;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .data-percentage {
+            color: var(--claro-red);
+            font-size: 0.8rem;
+            min-width: 45px;
+            text-align: right;
+            font-weight: 700;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 18px;
+            background-color: var(--claro-red);
+            border-radius: 2px;
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .styled-table th {
+            background: linear-gradient(135deg, #da291c 0%, #b92218 100%);
+            color: #ffffff;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            border: 1px solid #991b1b;
+        }
+
+        .styled-table tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #fff1f2;
+            transition: background-color 0.15s ease;
+        }
+
+        .styled-table td.number {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .full-width-section {
+            background-color: var(--panel-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .chart-wrapper {
+            background: #fff;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            height: 350px;
+        }
+
+        /* Tabs Styles */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            background: #f1f5f9;
+        }
+
+        .tab-btn.active {
+            background: var(--claro-red);
+            color: #fff;
+            border-color: var(--claro-red);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>
+            <span class="header-tag">Ejecutivo</span>
+            Claro - Reporte Venta Cruzada Hogar [5116 & 5143]
+        </h1>
+        <div style="font-size: 0.95rem; color: var(--text-muted); font-weight: 600;">
+            Días hábiles: <span class="badge" id="dias-habiles-badge"></span> &nbsp; Días transcurridos: <span
+                class="badge" id="dias-transcurridos-badge"
+                style="color: var(--claro-red); border-color: var(--claro-red);"></span>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+
+        <!-- Contenido Principal Izquierdo -->
+        <div class="main-content">
+
+            <!-- Banner Gerencial KPI Summary Grid -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: #fef2f2; color: #da291c;">👥</div>
+                    <div class="kpi-info">
+                        <div class="kpi-title">Base Entregada</div>
+                        <div class="kpi-value">75.870</div>
+                        <div class="kpi-sub" style="color: #64748b;">100% Asignación P21</div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: #eff6ff; color: #2563eb;">📞</div>
+                    <div class="kpi-info">
+                        <div class="kpi-title">Base Gestionada</div>
+                        <div class="kpi-value">75.780</div>
+                        <div class="kpi-sub" style="color: #2563eb;">99,88% Cobertura</div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: #fdf4ff; color: #9333ea;">🎯</div>
+                    <div class="kpi-info">
+                        <div class="kpi-title">Base Contactada</div>
+                        <div class="kpi-value">23.566</div>
+                        <div class="kpi-sub" style="color: #9333ea;">31,10% Contactabilidad</div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: #ecfdf5; color: #059669;">💬</div>
+                    <div class="kpi-info">
+                        <div class="kpi-title">Contactos Efectivos</div>
+                        <div class="kpi-value">18.850</div>
+                        <div class="kpi-sub" style="color: #059669;">80,00% de Efectividad</div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: #fff1f2; color: #e11d48;">🚀</div>
+                    <div class="kpi-info">
+                        <div class="kpi-title">Total Ventas</div>
+                        <div class="kpi-value" style="color: #da291c;">23</div>
+                        <div class="kpi-sub" style="color: #da291c;">0,12% Efect. Base</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab(event, 'tab-datos')">Resumen General</button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-detallado')">Resumen Detallado Gestion y Analisis de Base</button>
+            </div>
+
+            <!-- Pestaña 1: Datos -->
+            <div id="tab-datos" class="tab-content active">
+                <div class="section-title">Resumen de Gestión</div>
+
+                <div>
+                    <!-- MES ACTUAL -->
+                    <div class="panel">
+                        <div class="panel-header">MES ACTUAL (JULIO)</div>
+                        <div class="panel-body" id="panel-julio">
+                            <!-- Generado por JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title" style="margin-top: 24px;">Efectividades y Desglose</div>
+                <div class="grid-2-cols">
+                    <div class="panel">
+                        <div class="panel-header secondary">Efectividades</div>
+                        <table class="styled-table" id="table-efectividades">
+                            <thead>
+                                <tr>
+                                    <th>Métrica</th>
+                                    <th class="number" style="color: var(--claro-red);">Mes Actual</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Generado por JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header secondary">Contactos Efectivos</div>
+                        <table class="styled-table" id="table-contactos">
+                            <thead>
+                                <tr>
+                                    <th>Motivo</th>
+                                    <th class="number" style="color: var(--claro-red);">Mes Actual</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Generado por JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña 2: Detallado -->
+            <div id="tab-detallado" class="tab-content">
+                <div class="section-title">Participación de Origen de Ventas</div>
+                <div class="panel" style="margin-bottom: 24px;">
+                    <table class="styled-table" id="table-origen-ventas">
+                        <thead>
+                            <tr>
+                                <th>Nombre Campaña</th>
+                                <th>Canal (PTAR)</th>
+                                <th class="number">Dentro Base</th>
+                                <th class="number">% Dentro Base</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Generado por JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section-title">Detalle de Tipificación y Alarmas</div>
+                <div class="panel">
+                    <table class="styled-table" id="table-tipificacion">
+                        <thead>
+                            <tr>
+                                <th>Tipificación / Alarma</th>
+                                <th class="number">Gestión</th>
+                                <th class="number">Intentos Tot.</th>
+                                <th class="number">Int. / Reg.</th>
+                                <th class="number">Contactos</th>
+                                <th class="number">Ventas</th>
+                                <th class="number">Efectividad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Generado por JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <!-- Panel Lateral Derecho REMOVED -->
+    </div>
+
+    <script>
+        // Datos Extraídos de la Base de Datos para Julio
+        const dataJulio = {
+            "baseEntregada": 75870,
+            "baseGestionada": 75780,
+            "baseContactada": 23566,
+            "contactosEfectivos": 18850,
+            "contactosNoEfectivos": 4716,
+            "noContactos": 52214,
+            "ventasHogares5116": 2,
+            "ventasServicios5116": 2,
+            "ventasHogares5143": 4,
+            "ventasServicios5143": 5,
+            "ventasHogaresOtrasPtar": 16,
+            "ventasServiciosOtrasPtar": 28,
+            "totalHogares": 23,
+            "totalHogaresSoloArroba": 22,
+            "totalServicios": 35,
+            "venta": 23,
+            "noVenta": 18704,
+            "noVentaDesglose": {
+                "No atractiva la oferta": 18457,
+                "Precio": 18301,
+                "Internet": 112,
+                "TV": 1,
+                "Mala experiencia": 43,
+                "Pide no volver a llamar": 74,
+                "Perm. con otro operador": 40,
+                "No Apto Cartera": 2,
+                "Cliente Mintic": 107,
+                "Cliente Corporativo": 11,
+                "Mejores Promociones": 11
+            },
+            "origenVentas": [
+                {
+                    "Nombre_Campana": "CROSSELLING_HOGAR_P21",
+                    "Canal_PTAR": "1008",
+                    "Total_Ventas": 7,
+                    "Dentro_Base": 7,
+                    "Porcentaje_DB": 100.0,
+                    "Fuera_Base": 0,
+                    "Porcentaje_FB": 0.0
+                },
+                {
+                    "Nombre_Campana": "CROSSELLING_HOGAR_P21",
+                    "Canal_PTAR": "1010_F",
+                    "Total_Ventas": 5,
+                    "Dentro_Base": 5,
+                    "Porcentaje_DB": 100.0,
+                    "Fuera_Base": 0,
+                    "Porcentaje_FB": 0.0
+                },
+                {
+                    "Nombre_Campana": "CROSSELLING_HOGAR_P21",
+                    "Canal_PTAR": null,
+                    "Total_Ventas": 3,
+                    "Dentro_Base": 3,
+                    "Porcentaje_DB": 100.0,
+                    "Fuera_Base": 0,
+                    "Porcentaje_FB": 0.0
+                },
+                {
+                    "Nombre_Campana": "CROSSELLING_HOGAR_P21",
+                    "Canal_PTAR": "5143",
+                    "Total_Ventas": 3,
+                    "Dentro_Base": 3,
+                    "Porcentaje_DB": 100.0,
+                    "Fuera_Base": 0,
+                    "Porcentaje_FB": 0.0
+                },
+                {
+                    "Nombre_Campana": "CROSSELLING_HOGAR_P21",
+                    "Canal_PTAR": "5116",
+                    "Total_Ventas": 2,
+                    "Dentro_Base": 2,
+                    "Porcentaje_DB": 100.0,
+                    "Fuera_Base": 0,
+                    "Porcentaje_FB": 0.0
+                },
+                {
+                    "Nombre_Campana": "CROSSELLING_HOGAR_P21",
+                    "Canal_PTAR": "1010f",
+                    "Total_Ventas": 1,
+                    "Dentro_Base": 1,
+                    "Porcentaje_DB": 100.0,
+                    "Fuera_Base": 0,
+                    "Porcentaje_FB": 0.0
+                },
+                {
+                    "Nombre_Campana": "CROSSELLING_HOGAR_P21",
+                    "Canal_PTAR": "1005",
+                    "Total_Ventas": 1,
+                    "Dentro_Base": 1,
+                    "Porcentaje_DB": 100.0,
+                    "Fuera_Base": 0,
+                    "Porcentaje_FB": 0.0
+                },
+                {
+                    "Nombre_Campana": "CROSSELLING_HOGAR_P21",
+                    "Canal_PTAR": "5143_F",
+                    "Total_Ventas": 1,
+                    "Dentro_Base": 1,
+                    "Porcentaje_DB": 100.0,
+                    "Fuera_Base": 0,
+                    "Porcentaje_FB": 0.0
+                }
+            ],
+            "detalleTipificacion": [
+                {
+                    "Tipificacion_Alarma": "NO_CONTACTOS-TELEFONO OCUPADO",
+                    "Gestion": 42390,
+                    "Intentos_Totales": 217427.0,
+                    "Intentos_Por_Registro": 5.13,
+                    "Contactos": 0.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO",
+                    "Gestion": 13719,
+                    "Intentos_Totales": 71794.0,
+                    "Intentos_Por_Registro": 5.23,
+                    "Contactos": 13719.0,
+                    "Ventas": 5.0,
+                    "Efectividad_Porcentaje": 0.04
+                },
+                {
+                    "Tipificacion_Alarma": "NO_CONTACTOS-CONTESTADOR",
+                    "Gestion": 9415,
+                    "Intentos_Totales": 26035.0,
+                    "Intentos_Por_Registro": 2.77,
+                    "Contactos": 0.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR",
+                    "Gestion": 4716,
+                    "Intentos_Totales": 26381.0,
+                    "Intentos_Por_Registro": 5.59,
+                    "Contactos": 4716.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO",
+                    "Gestion": 4582,
+                    "Intentos_Totales": 24063.0,
+                    "Intentos_Por_Registro": 5.25,
+                    "Contactos": 4582.0,
+                    "Ventas": 1.0,
+                    "Efectividad_Porcentaje": 0.02
+                },
+                {
+                    "Tipificacion_Alarma": "NO_CONTACTOS-NO CONTESTAN",
+                    "Gestion": 343,
+                    "Intentos_Totales": 1004.0,
+                    "Intentos_Por_Registro": 2.93,
+                    "Contactos": 0.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-VENTA-FIJO",
+                    "Gestion": 123,
+                    "Intentos_Totales": 724.0,
+                    "Intentos_Por_Registro": 5.89,
+                    "Contactos": 123.0,
+                    "Ventas": 16.0,
+                    "Efectividad_Porcentaje": 13.01
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-INTERNET",
+                    "Gestion": 112,
+                    "Intentos_Totales": 565.0,
+                    "Intentos_Por_Registro": 5.04,
+                    "Contactos": 112.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-APLICA CIUDAD PERO NO HAY COBERTURA BI",
+                    "Gestion": 88,
+                    "Intentos_Totales": 479.0,
+                    "Intentos_Por_Registro": 5.44,
+                    "Contactos": 88.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR",
+                    "Gestion": 74,
+                    "Intentos_Totales": 211.0,
+                    "Intentos_Por_Registro": 2.85,
+                    "Contactos": 74.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "NO_CONTACTOS-TELEFONO DESCONECTADO",
+                    "Gestion": 58,
+                    "Intentos_Totales": 211.0,
+                    "Intentos_Por_Registro": 3.64,
+                    "Contactos": 0.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-MALA EXPERIENCIA CON PROCESOS DE CLARO",
+                    "Gestion": 43,
+                    "Intentos_Totales": 237.0,
+                    "Intentos_Por_Registro": 5.51,
+                    "Contactos": 43.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-PERMANENCIA ACTIVA CON OTRO OPERADOR",
+                    "Gestion": 40,
+                    "Intentos_Totales": 213.0,
+                    "Intentos_Por_Registro": 5.33,
+                    "Contactos": 40.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-VENTA-CONVERGENTE",
+                    "Gestion": 22,
+                    "Intentos_Totales": 134.0,
+                    "Intentos_Por_Registro": 6.09,
+                    "Contactos": 22.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE CORPORATIVO",
+                    "Gestion": 11,
+                    "Intentos_Totales": 60.0,
+                    "Intentos_Por_Registro": 5.45,
+                    "Contactos": 11.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-DESEA MAS VELOCIDAD",
+                    "Gestion": 9,
+                    "Intentos_Totales": 51.0,
+                    "Intentos_Por_Registro": 5.67,
+                    "Contactos": 9.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "NO_CONTACTOS-NO HAY CONTACTO CON EL TITULAR",
+                    "Gestion": 8,
+                    "Intentos_Totales": 40.0,
+                    "Intentos_Por_Registro": 5.0,
+                    "Contactos": 0.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-MEJORES PROMOCIONES-MOVISTAR",
+                    "Gestion": 7,
+                    "Intentos_Totales": 34.0,
+                    "Intentos_Por_Registro": 4.86,
+                    "Contactos": 7.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-RECIBO AGUA O LUZ DIFERENTE A RR",
+                    "Gestion": 4,
+                    "Intentos_Totales": 21.0,
+                    "Intentos_Por_Registro": 5.25,
+                    "Contactos": 4.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-NO APLICA CIUDAD MINTIC",
+                    "Gestion": 4,
+                    "Intentos_Totales": 19.0,
+                    "Intentos_Por_Registro": 4.75,
+                    "Contactos": 4.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO APTO CARTERA",
+                    "Gestion": 2,
+                    "Intentos_Totales": 11.0,
+                    "Intentos_Por_Registro": 5.5,
+                    "Contactos": 2.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO ACEPTA DTH-PRECIO",
+                    "Gestion": 2,
+                    "Intentos_Totales": 11.0,
+                    "Intentos_Por_Registro": 5.5,
+                    "Contactos": 2.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-NO APLICA ESTRATO 1 O 2",
+                    "Gestion": 2,
+                    "Intentos_Totales": 14.0,
+                    "Intentos_Por_Registro": 7.0,
+                    "Contactos": 2.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-MEJORES PROMOCIONES-PARABOLICA",
+                    "Gestion": 2,
+                    "Intentos_Totales": 14.0,
+                    "Intentos_Por_Registro": 7.0,
+                    "Contactos": 2.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-MEJORES PROMOCIONES-DIRECTV",
+                    "Gestion": 1,
+                    "Intentos_Totales": 5.0,
+                    "Intentos_Por_Registro": 5.0,
+                    "Contactos": 1.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-TV",
+                    "Gestion": 1,
+                    "Intentos_Totales": 7.0,
+                    "Intentos_Por_Registro": 7.0,
+                    "Contactos": 1.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-VENTA -MOVIL",
+                    "Gestion": 1,
+                    "Intentos_Totales": 12.0,
+                    "Intentos_Por_Registro": 12.0,
+                    "Contactos": 1.0,
+                    "Ventas": 1.0,
+                    "Efectividad_Porcentaje": 100.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-MEJORES PROMOCIONES-UNE",
+                    "Gestion": 1,
+                    "Intentos_Totales": 7.0,
+                    "Intentos_Por_Registro": 7.0,
+                    "Contactos": 1.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                }
+            ]
+        };
+
+
+
+        const getPct = (val, base) => base > 0 ? ((val / base) * 100).toFixed(2) + '%' : '0.00%';
+
+        function renderMainPanel(containerId, data) {
+            const container = document.getElementById(containerId);
+
+            const rows = [
+                { label: 'Base Entregada', val: data.baseEntregada, pct: '' },
+                { label: 'Base Gestionada', val: data.baseGestionada, pct: getPct(data.baseGestionada, data.baseEntregada) },
+                { label: 'Base Contactada', val: data.baseContactada, pct: getPct(data.baseContactada, data.baseGestionada) },
+                { label: 'Contactos Efectivos', val: data.contactosEfectivos, pct: getPct(data.contactosEfectivos, data.baseContactada) },
+                { label: 'Contactos No Efectivos', val: data.contactosNoEfectivos, pct: getPct(data.contactosNoEfectivos, data.baseContactada) },
+                { label: 'No Contactos', val: data.noContactos, pct: getPct(data.noContactos, data.baseGestionada) },
+                { label: 'Ventas Hogares @ 5116', val: data.ventasHogares5116, pct: '' },
+                { label: 'Ventas Servicios 5116', val: data.ventasServicios5116, pct: '' },
+                { label: 'Ventas Hogares @ 5143', val: data.ventasHogares5143, pct: '' },
+                { label: 'Ventas Servicios 5143', val: data.ventasServicios5143, pct: '' },
+                { label: 'Ventas Hogares @ Otras Ptar', val: data.ventasHogaresOtrasPtar, pct: '' },
+                { label: 'Ventas Servicios @ Otras Ptar', val: data.ventasServiciosOtrasPtar, pct: '' },
+                { label: 'TOTAL HOGARES', val: data.totalHogares, pct: '' },
+                { label: 'TOTAL HOGARES SOLO @', val: data.totalHogaresSoloArroba, pct: '' },
+                { label: 'TOTAL SERVICIOS', val: data.totalServicios, pct: '' },
+            ];
+
+            let html = '';
+            rows.forEach(r => {
+                let styleStr = r.label.includes('TOTAL') ? 'background: #f1f5f9; padding: 8px; margin-top: 5px; border-radius: 4px;' : '';
+                let labelStyle = r.label.includes('TOTAL') ? 'color: var(--text-main); font-weight: bold;' : '';
+                html += '<div class="data-row" style="' + styleStr + '">';
+                html += '    <div class="data-label" style="' + labelStyle + '">' + r.label + '</div>';
+                html += '    <div class="data-value">';
+                html += '        ' + r.val.toLocaleString();
+                html += '        <span class="data-percentage">' + r.pct + '</span>';
+                html += '    </div>';
+                html += '</div>';
+            });
+            container.innerHTML = html;
+        }
+
+        function renderEfectividades(dataJulio) {
+            const tbody = document.querySelector('#table-efectividades tbody');
+
+            const metrics = [
+                {
+                    label: 'Sobre Base Entregada',
+                    valJul: getPct(dataJulio.venta, dataJulio.baseEntregada)
+                },
+                {
+                    label: 'Sobre Base Gestionada',
+                    valJul: getPct(dataJulio.venta, dataJulio.baseGestionada)
+                },
+                {
+                    label: 'Sobre Base Contactada',
+                    valJul: getPct(dataJulio.venta, dataJulio.baseContactada)
+                },
+                {
+                    label: 'Sobre Contacto Efectivo',
+                    valJul: getPct(dataJulio.venta, dataJulio.contactosEfectivos)
+                }
+            ];
+
+            let html = '';
+            metrics.forEach(m => {
+                html += '<tr>';
+                html += '    <td>' + m.label + '</td>';
+                html += '    <td class="number" style="color: var(--claro-red); font-weight: 700;">' + m.valJul + '</td>';
+                html += '</tr>';
+            });
+            tbody.innerHTML = html;
+        }
+
+        function renderContactos(dataJulio) {
+            const tbody = document.querySelector('#table-contactos tbody');
+
+            // Contactos efectivos tipificados como venta por el agente pero sin venta
+            // confirmada en tb_crudo_ventas_hogar (ni Venta ni "NO VENTA" en el árbol).
+            const sinRegistro = dataJulio.contactosEfectivos - dataJulio.venta - dataJulio.noVenta;
+
+            let html = '<tr style="background: rgba(16, 185, 129, 0.1);">';
+            html += '    <td style="font-weight:bold; color:#059669;">Venta</td>';
+            html += '    <td class="number" style="font-weight:bold; color:#059669;">' + dataJulio.venta + '</td>';
+            html += '</tr>';
+            html += '<tr style="background: rgba(218, 41, 28, 0.1);">';
+            html += '    <td style="font-weight:bold; color:var(--claro-red);">No Venta</td>';
+            html += '    <td class="number" style="font-weight:bold; color:var(--claro-red);">' + dataJulio.noVenta + '</td>';
+            html += '</tr>';
+            if (sinRegistro !== 0) {
+                html += '<tr style="background: rgba(100, 116, 139, 0.1);">';
+                html += '    <td style="font-weight:bold; color:var(--text-muted);">Venta Tipificada Sin Registro</td>';
+                html += '    <td class="number" style="font-weight:bold; color:var(--text-muted);">' + sinRegistro + '</td>';
+                html += '</tr>';
+            }
+
+            for (const [key, valueJulio] of Object.entries(dataJulio.noVentaDesglose)) {
+                let pctJul = dataJulio.noVenta > 0 ? ((valueJulio / dataJulio.noVenta) * 100).toFixed(1) + '%' : '0%';
+                html += '<tr>';
+                html += '    <td style="padding-left: 20px;">' + key + '</td>';
+                html += '    <td class="number">' + valueJulio + ' <span style="color:var(--text-muted); font-size:0.75rem; margin-left:8px;">' + pctJul + '</span></td>';
+                html += '</tr>';
+            }
+            tbody.innerHTML = html;
+        }
+
+        function renderOrigenVentas(data) {
+            const tbody = document.querySelector('#table-origen-ventas tbody');
+            let html = '';
+            
+            if (!data.origenVentas || data.origenVentas.length === 0) {
+                html = '<tr><td colspan="4" style="text-align:center;">No hay datos de Origen de Ventas</td></tr>';
+            } else {
+                data.origenVentas.forEach(row => {
+                    html += `<tr>`;
+                    html += `    <td>${row.Nombre_Campana}</td>`;
+                    html += `    <td>${row.Canal_PTAR ?? 'Sin PTAR'}</td>`;
+                    html += `    <td class="number" style="font-weight:700;">${row.Dentro_Base}</td>`;
+                    html += `    <td class="number" style="color:var(--claro-red); font-weight:700;">${row.Porcentaje_DB}%</td>`;
+                    html += `</tr>`;
+                });
+            }
+            tbody.innerHTML = html;
+        }
+
+        function renderTipificacion(data) {
+            const tbody = document.querySelector('#table-tipificacion tbody');
+            let html = '';
+            
+            if (!data.detalleTipificacion || data.detalleTipificacion.length === 0) {
+                html = '<tr><td colspan="7" style="text-align:center;">No hay datos de Tipificación</td></tr>';
+            } else {
+                data.detalleTipificacion.forEach(row => {
+                    html += `<tr>`;
+                    html += `    <td>${row.Tipificacion_Alarma || 'Desconocido'}</td>`;
+                    html += `    <td class="number">${row.Gestion}</td>`;
+                    html += `    <td class="number">${row.Intentos_Totales}</td>`;
+                    html += `    <td class="number">${row.Intentos_Por_Registro}</td>`;
+                    html += `    <td class="number">${row.Contactos}</td>`;
+                    html += `    <td class="number" style="color:#059669; font-weight:bold;">${row.Ventas}</td>`;
+                    html += `    <td class="number" style="color:var(--claro-red); font-weight:bold;">${row.Efectividad_Porcentaje}%</td>`;
+                    html += `</tr>`;
+                });
+            }
+            tbody.innerHTML = html;
+        }
+
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            const tabBtns = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove('active');
+            }
+            
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+
+
+        function calcularDiasHabiles() {
+            const hoy = new Date();
+            const year = hoy.getFullYear();
+            const month = hoy.getMonth();
+            const diasMes = new Date(year, month + 1, 0).getDate();
+            const diaActual = hoy.getDate();
+
+            // Festivos Colombia (Aproximación simple para Julio 20 y 7 de Agosto, etc)
+            const festivos = [
+                new Date(year, 6, 20).getTime(), // 20 de Julio
+                new Date(year, 7, 7).getTime()   // 7 de Agosto
+            ];
+
+            let habiles = 0;
+            let transcurridos = 0;
+
+            for (let i = 1; i <= diasMes; i++) {
+                const d = new Date(year, month, i);
+                const diaSemana = d.getDay(); // 0 es Domingo
+                const esFestivo = festivos.some(f => f === d.getTime());
+
+                if (diaSemana !== 0 && !esFestivo) { // Lunes a Sábado, no festivo
+                    habiles++;
+                    if (i <= diaActual) {
+                        transcurridos++;
+                    }
+                }
+            }
+
+            document.getElementById('dias-habiles-badge').innerText = habiles;
+            document.getElementById('dias-transcurridos-badge').innerText = transcurridos;
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            calcularDiasHabiles();
+
+            renderMainPanel('panel-julio', dataJulio);
+
+            renderEfectividades(dataJulio);
+            renderContactos(dataJulio);
+            
+            renderOrigenVentas(dataJulio);
+            renderTipificacion(dataJulio);
+        });
+    </script>
+</body>
+
+</html>

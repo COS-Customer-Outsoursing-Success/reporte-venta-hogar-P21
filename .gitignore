@@ -1,0 +1,7 @@
+# Ignore large dataset files and Vercel cache
+*.csv
+*.xlsx
+__pycache__/
+*.pyc
+.env
+.vercel/
