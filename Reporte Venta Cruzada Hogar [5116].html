@@ -345,10 +345,16 @@
             <span class="header-tag">Ejecutivo</span>
             Claro - Reporte Venta Cruzada Hogar [5116 & 5143]
         </h1>
-        <div style="font-size: 0.95rem; color: var(--text-muted); font-weight: 600;">
-            Días hábiles: <span class="badge" id="dias-habiles-badge"></span> &nbsp; Días transcurridos: <span
-                class="badge" id="dias-transcurridos-badge"
-                style="color: var(--claro-red); border-color: var(--claro-red);"></span>
+        <div style="font-size: 0.95rem; color: var(--text-muted); font-weight: 600; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <div>
+                Días hábiles: <span class="badge" id="dias-habiles-badge"></span> &nbsp; Días transcurridos: <span
+                    class="badge" id="dias-transcurridos-badge"
+                    style="color: var(--claro-red); border-color: var(--claro-red);"></span>
+            </div>
+            <div style="background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; padding: 4px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                <span>🕒 Última actualización:</span>
+                <span id="ultima-actualizacion-badge">--</span>
+            </div>
         </div>
     </div>
 
@@ -505,6 +511,7 @@
     <script>
         // Datos Extraídos de la Base de Datos para Julio
         const dataJulio = {
+            "fechaActualizacion": "29/07/2026 07:59:52 AM",
             "baseEntregada": 75870,
             "baseGestionada": 75780,
             "baseContactada": 23799,
@@ -1062,6 +1069,12 @@
 
         // Init
         document.addEventListener('DOMContentLoaded', () => {
+            // Mostrar fecha y hora de última actualización
+            const badgeActualizacion = document.getElementById('ultima-actualizacion-badge');
+            if (badgeActualizacion) {
+                badgeActualizacion.innerText = dataJulio.fechaActualizacion || "29/07/2026 (Sin fecha)";
+            }
+
             calcularDiasHabiles();
 
             renderMainPanel('panel-julio', dataJulio);

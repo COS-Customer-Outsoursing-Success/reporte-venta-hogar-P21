@@ -3,6 +3,7 @@ import re
 import json
 import os
 import time
+from datetime import datetime
 from pymysql.constants import CLIENT
 
 # ==============================================================================
@@ -97,6 +98,7 @@ def main():
 
     # 5. Construir el objeto JSON para Julio
     nuevo_dataJulio = {
+        "fechaActualizacion": datetime.now().strftime("%d/%m/%Y %I:%M:%S %p"),
         "baseEntregada": data.get("Base Entregada", 0),
         "baseGestionada": data.get("Base Gestionada", 0),
         "baseContactada": data.get("Base Contactada", 0),
