@@ -371,40 +371,40 @@
                     <div class="kpi-icon" style="background: #fef2f2; color: #da291c;">👥</div>
                     <div class="kpi-info">
                         <div class="kpi-title">Base Entregada</div>
-                        <div class="kpi-value">75.870</div>
-                        <div class="kpi-sub" style="color: #64748b;">100% Asignación P21</div>
+                        <div class="kpi-value" id="kpi-base-entregada-val">75.870</div>
+                        <div class="kpi-sub" id="kpi-base-entregada-sub" style="color: #64748b;">100% Asignación P21</div>
                     </div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-icon" style="background: #eff6ff; color: #2563eb;">📞</div>
                     <div class="kpi-info">
                         <div class="kpi-title">Base Gestionada</div>
-                        <div class="kpi-value">75.780</div>
-                        <div class="kpi-sub" style="color: #2563eb;">99,88% Cobertura</div>
+                        <div class="kpi-value" id="kpi-base-gestionada-val">75.780</div>
+                        <div class="kpi-sub" id="kpi-base-gestionada-sub" style="color: #2563eb;">99,88% Cobertura</div>
                     </div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-icon" style="background: #fdf4ff; color: #9333ea;">🎯</div>
                     <div class="kpi-info">
                         <div class="kpi-title">Base Contactada</div>
-                        <div class="kpi-value">23.566</div>
-                        <div class="kpi-sub" style="color: #9333ea;">31,10% Contactabilidad</div>
+                        <div class="kpi-value" id="kpi-base-contactada-val">23.566</div>
+                        <div class="kpi-sub" id="kpi-base-contactada-sub" style="color: #9333ea;">31,10% Contactabilidad</div>
                     </div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-icon" style="background: #ecfdf5; color: #059669;">💬</div>
                     <div class="kpi-info">
                         <div class="kpi-title">Contactos Efectivos</div>
-                        <div class="kpi-value">18.850</div>
-                        <div class="kpi-sub" style="color: #059669;">80,00% de Efectividad</div>
+                        <div class="kpi-value" id="kpi-contactos-efectivos-val">18.850</div>
+                        <div class="kpi-sub" id="kpi-contactos-efectivos-sub" style="color: #059669;">80,00% de Efectividad</div>
                     </div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-icon" style="background: #fff1f2; color: #e11d48;">🚀</div>
                     <div class="kpi-info">
                         <div class="kpi-title">Total Ventas</div>
-                        <div class="kpi-value" style="color: #da291c;">23</div>
-                        <div class="kpi-sub" style="color: #da291c;">0,12% Efect. Base</div>
+                        <div class="kpi-value" id="kpi-total-ventas-val" style="color: #da291c;">23</div>
+                        <div class="kpi-sub" id="kpi-total-ventas-sub" style="color: #da291c;">0,12% Efect. Base</div>
                     </div>
                 </div>
             </div>
@@ -514,34 +514,34 @@
     <script>
         // Datos Extraídos de la Base de Datos para Julio
         const dataJulio = {
-            "fechaActualizacion": "29/07/2026 07:59:52 AM",
+            "fechaActualizacion": "29/07/2026 11:57:57 AM",
             "baseEntregada": 75870,
             "baseGestionada": 75780,
-            "baseContactada": 23799,
-            "contactosEfectivos": 19088,
-            "contactosNoEfectivos": 4711,
-            "noContactos": 51981,
-            "ventasHogares5116": 2,
-            "ventasServicios5116": 2,
+            "baseContactada": 23880,
+            "contactosEfectivos": 19172,
+            "contactosNoEfectivos": 4708,
+            "noContactos": 51900,
+            "ventasHogares5116": 3,
+            "ventasServicios5116": 3,
             "ventasHogares5143": 4,
             "ventasServicios5143": 5,
-            "ventasHogaresOtrasPtar": 16,
-            "ventasServiciosOtrasPtar": 28,
-            "totalHogares": 23,
-            "totalHogaresSoloArroba": 22,
-            "totalServicios": 35,
-            "venta": 23,
-            "noVenta": 18931,
+            "ventasHogaresOtrasPtar": 19,
+            "ventasServiciosOtrasPtar": 32,
+            "totalHogares": 27,
+            "totalHogaresSoloArroba": 26,
+            "totalServicios": 40,
+            "venta": 27,
+            "noVenta": 19015,
             "noVentaDesglose": {
-                "No atractiva la oferta": 18684,
-                "Precio": 18526,
+                "No atractiva la oferta": 18765,
+                "Precio": 18607,
                 "Internet": 112,
                 "TV": 1,
                 "Mala experiencia": 45,
                 "Pide no volver a llamar": 75,
                 "Perm. con otro operador": 40,
                 "No Apto Cartera": 2,
-                "Cliente Mintic": 104,
+                "Cliente Mintic": 107,
                 "Cliente Corporativo": 11,
                 "Mejores Promociones": 13
             },
@@ -549,8 +549,8 @@
                 {
                     "Nombre_Campana": "CROSSELLING_HOGAR_P21",
                     "Canal_PTAR": "1008",
-                    "Total_Ventas": 7,
-                    "Dentro_Base": 7,
+                    "Total_Ventas": 8,
+                    "Dentro_Base": 8,
                     "Porcentaje_DB": 100.0,
                     "Fuera_Base": 0,
                     "Porcentaje_FB": 0.0
@@ -585,8 +585,8 @@
                 {
                     "Nombre_Campana": "CROSSELLING_HOGAR_P21",
                     "Canal_PTAR": "5116",
-                    "Total_Ventas": 2,
-                    "Dentro_Base": 2,
+                    "Total_Ventas": 3,
+                    "Dentro_Base": 3,
                     "Porcentaje_DB": 100.0,
                     "Fuera_Base": 0,
                     "Porcentaje_FB": 0.0
@@ -594,6 +594,24 @@
                 {
                     "Nombre_Campana": "CROSSELLING_HOGAR_P21",
                     "Canal_PTAR": "5143_F",
+                    "Total_Ventas": 1,
+                    "Dentro_Base": 1,
+                    "Porcentaje_DB": 100.0,
+                    "Fuera_Base": 0,
+                    "Porcentaje_FB": 0.0
+                },
+                {
+                    "Nombre_Campana": "CROSSELLING_HOGAR_P21",
+                    "Canal_PTAR": "1001",
+                    "Total_Ventas": 1,
+                    "Dentro_Base": 1,
+                    "Porcentaje_DB": 100.0,
+                    "Fuera_Base": 0,
+                    "Porcentaje_FB": 0.0
+                },
+                {
+                    "Nombre_Campana": "CROSSELLING_HOGAR_P21",
+                    "Canal_PTAR": "1010",
                     "Total_Ventas": 1,
                     "Dentro_Base": 1,
                     "Porcentaje_DB": 100.0,
@@ -622,54 +640,54 @@
             "detalleTipificacion": [
                 {
                     "Tipificacion_Alarma": "NO_CONTACTOS-TELEFONO OCUPADO",
-                    "Gestion": 42402,
-                    "Intentos_Totales": 221767.0,
-                    "Intentos_Por_Registro": 5.23,
+                    "Gestion": 42456,
+                    "Intentos_Totales": 224826.0,
+                    "Intentos_Por_Registro": 5.3,
                     "Contactos": 0.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO",
-                    "Gestion": 13884,
-                    "Intentos_Totales": 74117.0,
-                    "Intentos_Por_Registro": 5.34,
-                    "Contactos": 13884.0,
+                    "Gestion": 13972,
+                    "Intentos_Totales": 75559.0,
+                    "Intentos_Por_Registro": 5.41,
+                    "Contactos": 13972.0,
                     "Ventas": 5.0,
                     "Efectividad_Porcentaje": 0.04
                 },
                 {
                     "Tipificacion_Alarma": "NO_CONTACTOS-CONTESTADOR",
-                    "Gestion": 9167,
-                    "Intentos_Totales": 26375.0,
-                    "Intentos_Por_Registro": 2.88,
+                    "Gestion": 8974,
+                    "Intentos_Totales": 26568.0,
+                    "Intentos_Por_Registro": 2.96,
                     "Contactos": 0.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR",
-                    "Gestion": 4711,
-                    "Intentos_Totales": 26476.0,
-                    "Intentos_Por_Registro": 5.62,
-                    "Contactos": 4711.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO",
-                    "Gestion": 4642,
-                    "Intentos_Totales": 24956.0,
-                    "Intentos_Por_Registro": 5.38,
-                    "Contactos": 4642.0,
+                    "Gestion": 4714,
+                    "Intentos_Totales": 25710.0,
+                    "Intentos_Por_Registro": 5.45,
+                    "Contactos": 4714.0,
                     "Ventas": 1.0,
                     "Efectividad_Porcentaje": 0.02
                 },
                 {
+                    "Tipificacion_Alarma": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR",
+                    "Gestion": 4707,
+                    "Intentos_Totales": 26529.0,
+                    "Intentos_Por_Registro": 5.64,
+                    "Contactos": 4707.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
                     "Tipificacion_Alarma": "NO_CONTACTOS-NO CONTESTAN",
-                    "Gestion": 349,
-                    "Intentos_Totales": 1080.0,
-                    "Intentos_Por_Registro": 3.09,
+                    "Gestion": 330,
+                    "Intentos_Totales": 1009.0,
+                    "Intentos_Por_Registro": 3.06,
                     "Contactos": 0.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -677,27 +695,27 @@
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-VENTA-FIJO",
                     "Gestion": 134,
-                    "Intentos_Totales": 818.0,
-                    "Intentos_Por_Registro": 6.1,
+                    "Intentos_Totales": 828.0,
+                    "Intentos_Por_Registro": 6.18,
                     "Contactos": 134.0,
-                    "Ventas": 16.0,
-                    "Efectividad_Porcentaje": 11.94
+                    "Ventas": 20.0,
+                    "Efectividad_Porcentaje": 14.93
                 },
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-INTERNET",
-                    "Gestion": 112,
-                    "Intentos_Totales": 576.0,
-                    "Intentos_Por_Registro": 5.14,
-                    "Contactos": 112.0,
+                    "Gestion": 111,
+                    "Intentos_Totales": 573.0,
+                    "Intentos_Por_Registro": 5.16,
+                    "Contactos": 111.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-APLICA CIUDAD PERO NO HAY COBERTURA BI",
-                    "Gestion": 86,
-                    "Intentos_Totales": 472.0,
-                    "Intentos_Por_Registro": 5.49,
-                    "Contactos": 86.0,
+                    "Gestion": 89,
+                    "Intentos_Totales": 498.0,
+                    "Intentos_Por_Registro": 5.6,
+                    "Contactos": 89.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
@@ -713,8 +731,8 @@
                 {
                     "Tipificacion_Alarma": "NO_CONTACTOS-TELEFONO DESCONECTADO",
                     "Gestion": 56,
-                    "Intentos_Totales": 208.0,
-                    "Intentos_Por_Registro": 3.71,
+                    "Intentos_Totales": 212.0,
+                    "Intentos_Por_Registro": 3.79,
                     "Contactos": 0.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -722,8 +740,8 @@
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-MALA EXPERIENCIA CON PROCESOS DE CLARO",
                     "Gestion": 45,
-                    "Intentos_Totales": 243.0,
-                    "Intentos_Por_Registro": 5.4,
+                    "Intentos_Totales": 247.0,
+                    "Intentos_Por_Registro": 5.49,
                     "Contactos": 45.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -731,8 +749,8 @@
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-PERMANENCIA ACTIVA CON OTRO OPERADOR",
                     "Gestion": 40,
-                    "Intentos_Totales": 218.0,
-                    "Intentos_Por_Registro": 5.45,
+                    "Intentos_Totales": 219.0,
+                    "Intentos_Por_Registro": 5.48,
                     "Contactos": 40.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -740,8 +758,8 @@
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-VENTA-CONVERGENTE",
                     "Gestion": 22,
-                    "Intentos_Totales": 134.0,
-                    "Intentos_Por_Registro": 6.09,
+                    "Intentos_Totales": 137.0,
+                    "Intentos_Por_Registro": 6.23,
                     "Contactos": 22.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -749,8 +767,8 @@
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE CORPORATIVO",
                     "Gestion": 11,
-                    "Intentos_Totales": 60.0,
-                    "Intentos_Por_Registro": 5.45,
+                    "Intentos_Totales": 62.0,
+                    "Intentos_Por_Registro": 5.64,
                     "Contactos": 11.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -783,6 +801,15 @@
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-RECIBO AGUA O LUZ DIFERENTE A RR",
+                    "Gestion": 4,
+                    "Intentos_Totales": 22.0,
+                    "Intentos_Por_Registro": 5.5,
+                    "Contactos": 4.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-NO APLICA CIUDAD MINTIC",
                     "Gestion": 4,
                     "Intentos_Totales": 19.0,
@@ -797,15 +824,6 @@
                     "Intentos_Totales": 23.0,
                     "Intentos_Por_Registro": 5.75,
                     "Contactos": 4.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-RECIBO AGUA O LUZ DIFERENTE A RR",
-                    "Gestion": 3,
-                    "Intentos_Totales": 16.0,
-                    "Intentos_Por_Registro": 5.33,
-                    "Contactos": 3.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
@@ -830,8 +848,8 @@
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-NO APLICA ESTRATO 1 O 2",
                     "Gestion": 2,
-                    "Intentos_Totales": 14.0,
-                    "Intentos_Por_Registro": 7.0,
+                    "Intentos_Totales": 15.0,
+                    "Intentos_Por_Registro": 7.5,
                     "Contactos": 2.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -878,6 +896,35 @@
 
 
         const getPct = (val, base) => base > 0 ? ((val / base) * 100).toFixed(2) + '%' : '0.00%';
+
+        function renderExecutiveKPIs(data) {
+            const getPctEs = (val, base) => base > 0 ? ((val / base) * 100).toFixed(2).replace('.', ',') + '%' : '0,00%';
+            
+            const totalVentas = data.venta || data.totalHogares || 0;
+
+            const baseEntEl = document.getElementById('kpi-base-entregada-val');
+            if (baseEntEl) baseEntEl.innerText = (data.baseEntregada || 0).toLocaleString('es-CO');
+
+            const baseGestEl = document.getElementById('kpi-base-gestionada-val');
+            if (baseGestEl) baseGestEl.innerText = (data.baseGestionada || 0).toLocaleString('es-CO');
+            const baseGestSubEl = document.getElementById('kpi-base-gestionada-sub');
+            if (baseGestSubEl) baseGestSubEl.innerText = `${getPctEs(data.baseGestionada, data.baseEntregada)} Cobertura`;
+
+            const baseContEl = document.getElementById('kpi-base-contactada-val');
+            if (baseContEl) baseContEl.innerText = (data.baseContactada || 0).toLocaleString('es-CO');
+            const baseContSubEl = document.getElementById('kpi-base-contactada-sub');
+            if (baseContSubEl) baseContSubEl.innerText = `${getPctEs(data.baseContactada, data.baseGestionada)} Contactabilidad`;
+
+            const contEfEl = document.getElementById('kpi-contactos-efectivos-val');
+            if (contEfEl) contEfEl.innerText = (data.contactosEfectivos || 0).toLocaleString('es-CO');
+            const contEfSubEl = document.getElementById('kpi-contactos-efectivos-sub');
+            if (contEfSubEl) contEfSubEl.innerText = `${getPctEs(data.contactosEfectivos, data.baseContactada)} de Efectividad`;
+
+            const totVentEl = document.getElementById('kpi-total-ventas-val');
+            if (totVentEl) totVentEl.innerText = totalVentas.toLocaleString('es-CO');
+            const totVentSubEl = document.getElementById('kpi-total-ventas-sub');
+            if (totVentSubEl) totVentSubEl.innerText = `${getPctEs(totalVentas, data.contactosEfectivos)} Efect. Base`;
+        }
 
         function renderMainPanel(containerId, data) {
             const container = document.getElementById(containerId);
@@ -1080,6 +1127,7 @@
 
             calcularDiasHabiles();
 
+            renderExecutiveKPIs(dataJulio);
             renderMainPanel('panel-julio', dataJulio);
 
             renderEfectividades(dataJulio);
