@@ -81,7 +81,7 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 18px 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
             display: flex;
             align-items: center;
             gap: 16px;
@@ -343,15 +343,17 @@
     <div class="header">
         <h1>
             <span class="header-tag">Ejecutivo</span>
-            Claro - Reporte Venta Cruzada Hogar [5116 & 5143]
+            Claro - Reporte Venta Hogar P21 [5116 & 5143]
         </h1>
-        <div style="font-size: 0.95rem; color: var(--text-muted); font-weight: 600; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
-            <div>
-                Días hábiles: <span class="badge" id="dias-habiles-badge"></span> &nbsp; Días transcurridos: <span
-                    class="badge" id="dias-transcurridos-badge"
-                    style="color: var(--claro-red); border-color: var(--claro-red);"></span>
+        <div
+            style="font-size: 0.95rem; color: var(--text-muted); font-weight: 600; display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <span>Días hábiles: <span class="badge" id="dias-habiles-badge"></span></span>
+                <span>Días transcurridos: <span class="badge" id="dias-transcurridos-badge"
+                        style="color: var(--claro-red); border-color: var(--claro-red);"></span></span>
             </div>
-            <div style="background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; padding: 4px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+            <div
+                style="background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; padding: 4px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
                 <span>🕒 Última actualización:</span>
                 <span id="ultima-actualizacion-badge">--</span>
             </div>
@@ -409,7 +411,8 @@
 
             <div class="tabs">
                 <button class="tab-btn active" onclick="openTab(event, 'tab-datos')">Resumen General</button>
-                <button class="tab-btn" onclick="openTab(event, 'tab-detallado')">Resumen Detallado Gestion y Analisis de Base</button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-detallado')">Resumen Detallado Gestion y Analisis
+                    de Base</button>
             </div>
 
             <!-- Pestaña 1: Datos -->
@@ -457,55 +460,55 @@
                             </tbody>
                         </table>
                     </div>
-                    </div>
                 </div>
             </div>
-
-            <!-- Pestaña 2: Detallado -->
-            <div id="tab-detallado" class="tab-content">
-                <div class="section-title">Participación de Origen de Ventas</div>
-                <div class="panel" style="margin-bottom: 24px;">
-                    <table class="styled-table" id="table-origen-ventas">
-                        <thead>
-                            <tr>
-                                <th>Nombre Campaña</th>
-                                <th>Canal (PTAR)</th>
-                                <th class="number">Dentro Base</th>
-                                <th class="number">% Dentro Base</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Generado por JS -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="section-title">Detalle de Tipificación y Alarmas</div>
-                <div class="panel">
-                    <table class="styled-table" id="table-tipificacion">
-                        <thead>
-                            <tr>
-                                <th>Tipificación / Alarma</th>
-                                <th class="number">Gestión</th>
-                                <th class="number">Intentos Tot.</th>
-                                <th class="number">Int. / Reg.</th>
-                                <th class="number">Contactos</th>
-                                <th class="number">Ventas</th>
-                                <th class="number">Efectividad</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Generado por JS -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-
-
         </div>
 
-        <!-- Panel Lateral Derecho REMOVED -->
+        <!-- Pestaña 2: Detallado -->
+        <div id="tab-detallado" class="tab-content">
+            <div class="section-title">Participación de Origen de Ventas</div>
+            <div class="panel" style="margin-bottom: 24px;">
+                <table class="styled-table" id="table-origen-ventas">
+                    <thead>
+                        <tr>
+                            <th>Nombre Campaña</th>
+                            <th>Canal (PTAR)</th>
+                            <th class="number">Dentro Base</th>
+                            <th class="number">% Dentro Base</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Generado por JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section-title">Detalle de Tipificación y Alarmas</div>
+            <div class="panel">
+                <table class="styled-table" id="table-tipificacion">
+                    <thead>
+                        <tr>
+                            <th>Tipificación / Alarma</th>
+                            <th class="number">Gestión</th>
+                            <th class="number">Intentos Tot.</th>
+                            <th class="number">Int. / Reg.</th>
+                            <th class="number">Contactos</th>
+                            <th class="number">Ventas</th>
+                            <th class="number">Efectividad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Generado por JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!-- Panel Lateral Derecho REMOVED -->
     </div>
 
     <script>
@@ -979,7 +982,7 @@
         function renderOrigenVentas(data) {
             const tbody = document.querySelector('#table-origen-ventas tbody');
             let html = '';
-            
+
             if (!data.origenVentas || data.origenVentas.length === 0) {
                 html = '<tr><td colspan="4" style="text-align:center;">No hay datos de Origen de Ventas</td></tr>';
             } else {
@@ -998,7 +1001,7 @@
         function renderTipificacion(data) {
             const tbody = document.querySelector('#table-tipificacion tbody');
             let html = '';
-            
+
             if (!data.detalleTipificacion || data.detalleTipificacion.length === 0) {
                 html = '<tr><td colspan="7" style="text-align:center;">No hay datos de Tipificación</td></tr>';
             } else {
@@ -1022,12 +1025,12 @@
             for (let i = 0; i < tabContents.length; i++) {
                 tabContents[i].classList.remove('active');
             }
-            
+
             const tabBtns = document.getElementsByClassName('tab-btn');
             for (let i = 0; i < tabBtns.length; i++) {
                 tabBtns[i].classList.remove('active');
             }
-            
+
             document.getElementById(tabName).classList.add('active');
             evt.currentTarget.classList.add('active');
         }
@@ -1081,7 +1084,7 @@
 
             renderEfectividades(dataJulio);
             renderContactos(dataJulio);
-            
+
             renderOrigenVentas(dataJulio);
             renderTipificacion(dataJulio);
         });
