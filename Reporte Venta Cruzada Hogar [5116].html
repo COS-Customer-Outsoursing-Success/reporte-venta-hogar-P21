@@ -413,6 +413,7 @@
                 <button class="tab-btn active" onclick="openTab(event, 'tab-datos')">Resumen General</button>
                 <button class="tab-btn" onclick="openTab(event, 'tab-detallado')">Resumen Detallado Gestion y Analisis
                     de Base</button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-agentes')">Top 5 Tipificaciones por Asesor</button>
             </div>
 
             <!-- Pestaña 1: Datos -->
@@ -504,6 +505,25 @@
             </div>
         </div>
 
+        <!-- Pestaña 3: Top 5 por Agente -->
+        <div id="tab-agentes" class="tab-content">
+            <div class="section-title">Top 5 Tipificaciones por Asesor (Mes Completo)</div>
+            <table class="styled-table" id="table-agentes">
+                <thead>
+                    <tr>
+                        <th>Documento</th>
+                        <th>Asesor</th>
+                        <th style="text-align: center;">Posición</th>
+                        <th>Tipificación</th>
+                        <th style="text-align: right;">Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Generado por JS -->
+                </tbody>
+            </table>
+        </div>
+
 
 
     </div>
@@ -514,7 +534,7 @@
     <script>
         // Datos Extraídos de la Base de Datos para Julio
         const dataJulio = {
-            "fechaActualizacion": "04/08/2026 01:51:33 PM",
+            "fechaActualizacion": "04/08/2026 02:10:09 PM",
             "baseEntregada": 20069,
             "baseGestionada": 5148,
             "baseContactada": 461,
@@ -672,6 +692,666 @@
                     "Contactos": 1.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
+                }
+            ],
+            "top5Agentes": [
+                {
+                    "Documento": "1028861406",
+                    "Nombres_Apellidos": "Angie Juliana Avendano Lopez",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 467
+                },
+                {
+                    "Documento": "1028861406",
+                    "Nombres_Apellidos": "Angie Juliana Avendano Lopez",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 17
+                },
+                {
+                    "Documento": "1028861406",
+                    "Nombres_Apellidos": "Angie Juliana Avendano Lopez",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 3
+                },
+                {
+                    "Documento": "1028861406",
+                    "Nombres_Apellidos": "Angie Juliana Avendano Lopez",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-VENTA-FIJO--",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1028861406",
+                    "Nombres_Apellidos": "Angie Juliana Avendano Lopez",
+                    "Posicion": 5,
+                    "Tipificacion": "NO_CONTACTOS-TELEFONO OCUPADO---",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1000349115",
+                    "Nombres_Apellidos": "Bryan David Aguirre Osorio",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 100
+                },
+                {
+                    "Documento": "1000349115",
+                    "Nombres_Apellidos": "Bryan David Aguirre Osorio",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-APLICA CIUDAD PERO NO HAY COBERTURA BI-",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "1000349115",
+                    "Nombres_Apellidos": "Bryan David Aguirre Osorio",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1000349115",
+                    "Nombres_Apellidos": "Bryan David Aguirre Osorio",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-PERMANENCIA ACTIVA CON OTRO OPERADOR--",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1031171188",
+                    "Nombres_Apellidos": "Christian Andres Myers Barreto",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 451
+                },
+                {
+                    "Documento": "1031171188",
+                    "Nombres_Apellidos": "Christian Andres Myers Barreto",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 14
+                },
+                {
+                    "Documento": "1031171188",
+                    "Nombres_Apellidos": "Christian Andres Myers Barreto",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-APLICA CIUDAD PERO NO HAY COBERTURA BI-",
+                    "Cantidad": 4
+                },
+                {
+                    "Documento": "1031171188",
+                    "Nombres_Apellidos": "Christian Andres Myers Barreto",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR--",
+                    "Cantidad": 4
+                },
+                {
+                    "Documento": "1031171188",
+                    "Nombres_Apellidos": "Christian Andres Myers Barreto",
+                    "Posicion": 5,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 4
+                },
+                {
+                    "Documento": "1001286024",
+                    "Nombres_Apellidos": "Diego Andres Munoz Ramirez",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 484
+                },
+                {
+                    "Documento": "1001286024",
+                    "Nombres_Apellidos": "Diego Andres Munoz Ramirez",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-MALA EXPERIENCIA CON PROCESOS DE CLARO-",
+                    "Cantidad": 3
+                },
+                {
+                    "Documento": "1001286024",
+                    "Nombres_Apellidos": "Diego Andres Munoz Ramirez",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-RECIBO AGUA O LUZ DIFERENTE A RR-",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "1001286024",
+                    "Nombres_Apellidos": "Diego Andres Munoz Ramirez",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-DESEA MAS VELOCIDAD-",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "1001286024",
+                    "Nombres_Apellidos": "Diego Andres Munoz Ramirez",
+                    "Posicion": 5,
+                    "Tipificacion": "NO_CONTACTOS-CONTESTADOR---",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1016833613",
+                    "Nombres_Apellidos": "Hayek Mariana Figueroa Ferro",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 337
+                },
+                {
+                    "Documento": "1016833613",
+                    "Nombres_Apellidos": "Hayek Mariana Figueroa Ferro",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 11
+                },
+                {
+                    "Documento": "1016833613",
+                    "Nombres_Apellidos": "Hayek Mariana Figueroa Ferro",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-VENTA-FIJO--",
+                    "Cantidad": 8
+                },
+                {
+                    "Documento": "1016833613",
+                    "Nombres_Apellidos": "Hayek Mariana Figueroa Ferro",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 4
+                },
+                {
+                    "Documento": "1016833613",
+                    "Nombres_Apellidos": "Hayek Mariana Figueroa Ferro",
+                    "Posicion": 5,
+                    "Tipificacion": "NO_CONTACTOS-CONTESTADOR---",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "1014229143",
+                    "Nombres_Apellidos": "Ingrid Julieth Huertas Morales",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 160
+                },
+                {
+                    "Documento": "1014229143",
+                    "Nombres_Apellidos": "Ingrid Julieth Huertas Morales",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 30
+                },
+                {
+                    "Documento": "1014229143",
+                    "Nombres_Apellidos": "Ingrid Julieth Huertas Morales",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 9
+                },
+                {
+                    "Documento": "1014229143",
+                    "Nombres_Apellidos": "Ingrid Julieth Huertas Morales",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-APLICA CIUDAD PERO NO HAY COBERTURA BI-",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "1014229143",
+                    "Nombres_Apellidos": "Ingrid Julieth Huertas Morales",
+                    "Posicion": 5,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE CORPORATIVO--",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "51631845",
+                    "Nombres_Apellidos": "Isabel Cardona Rodriguez",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 297
+                },
+                {
+                    "Documento": "51631845",
+                    "Nombres_Apellidos": "Isabel Cardona Rodriguez",
+                    "Posicion": 2,
+                    "Tipificacion": "NO_CONTACTOS-NO CONTESTAN---",
+                    "Cantidad": 6
+                },
+                {
+                    "Documento": "51631845",
+                    "Nombres_Apellidos": "Isabel Cardona Rodriguez",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "51631845",
+                    "Nombres_Apellidos": "Isabel Cardona Rodriguez",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "51631845",
+                    "Nombres_Apellidos": "Isabel Cardona Rodriguez",
+                    "Posicion": 5,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-APLICA CIUDAD PERO NO HAY COBERTURA BI-",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "1026255962",
+                    "Nombres_Apellidos": "Jessica Maite Sabogal Diaz",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 54
+                },
+                {
+                    "Documento": "1026255962",
+                    "Nombres_Apellidos": "Jessica Maite Sabogal Diaz",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 22
+                },
+                {
+                    "Documento": "1026255962",
+                    "Nombres_Apellidos": "Jessica Maite Sabogal Diaz",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 5
+                },
+                {
+                    "Documento": "1026255962",
+                    "Nombres_Apellidos": "Jessica Maite Sabogal Diaz",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-NO APLICA CIUDAD MINTIC-",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1006890747",
+                    "Nombres_Apellidos": "Joalcid Fabian Fonseca Lopez",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 200
+                },
+                {
+                    "Documento": "1006890747",
+                    "Nombres_Apellidos": "Joalcid Fabian Fonseca Lopez",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "1006890747",
+                    "Nombres_Apellidos": "Joalcid Fabian Fonseca Lopez",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1006890747",
+                    "Nombres_Apellidos": "Joalcid Fabian Fonseca Lopez",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO APTO CARTERA--",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1233500864",
+                    "Nombres_Apellidos": "Johana Alejandra Fula Barrantes",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 336
+                },
+                {
+                    "Documento": "1233500864",
+                    "Nombres_Apellidos": "Johana Alejandra Fula Barrantes",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 141
+                },
+                {
+                    "Documento": "1233500864",
+                    "Nombres_Apellidos": "Johana Alejandra Fula Barrantes",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 28
+                },
+                {
+                    "Documento": "1233500864",
+                    "Nombres_Apellidos": "Johana Alejandra Fula Barrantes",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-MALA EXPERIENCIA CON PROCESOS DE CLARO-",
+                    "Cantidad": 7
+                },
+                {
+                    "Documento": "1233500864",
+                    "Nombres_Apellidos": "Johana Alejandra Fula Barrantes",
+                    "Posicion": 5,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR--",
+                    "Cantidad": 6
+                },
+                {
+                    "Documento": "1019902324",
+                    "Nombres_Apellidos": "Jojhan Gerardo Cardenas Martinez",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 296
+                },
+                {
+                    "Documento": "1019902324",
+                    "Nombres_Apellidos": "Jojhan Gerardo Cardenas Martinez",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "1024566650",
+                    "Nombres_Apellidos": "Kimberly Viviana Lache Paez",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 233
+                },
+                {
+                    "Documento": "1024566650",
+                    "Nombres_Apellidos": "Kimberly Viviana Lache Paez",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 9
+                },
+                {
+                    "Documento": "1024566650",
+                    "Nombres_Apellidos": "Kimberly Viviana Lache Paez",
+                    "Posicion": 3,
+                    "Tipificacion": "NO_CONTACTOS-TELEFONO OCUPADO---",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1024566650",
+                    "Nombres_Apellidos": "Kimberly Viviana Lache Paez",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR--",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1106782665",
+                    "Nombres_Apellidos": "Liseth Daniela Fernandez",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 213
+                },
+                {
+                    "Documento": "1106782665",
+                    "Nombres_Apellidos": "Liseth Daniela Fernandez",
+                    "Posicion": 2,
+                    "Tipificacion": "NO_CONTACTOS-NO HAY CONTACTO CON EL TITULAR---",
+                    "Cantidad": 16
+                },
+                {
+                    "Documento": "1106782665",
+                    "Nombres_Apellidos": "Liseth Daniela Fernandez",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 12
+                },
+                {
+                    "Documento": "1106782665",
+                    "Nombres_Apellidos": "Liseth Daniela Fernandez",
+                    "Posicion": 4,
+                    "Tipificacion": "NO_CONTACTOS-NO CONTESTAN---",
+                    "Cantidad": 10
+                },
+                {
+                    "Documento": "1106782665",
+                    "Nombres_Apellidos": "Liseth Daniela Fernandez",
+                    "Posicion": 5,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-APLICA CIUDAD PERO NO HAY COBERTURA BI-",
+                    "Cantidad": 3
+                },
+                {
+                    "Documento": "6421245",
+                    "Nombres_Apellidos": "Luanni Yeliana Fernandez Gonzalez",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 293
+                },
+                {
+                    "Documento": "6421245",
+                    "Nombres_Apellidos": "Luanni Yeliana Fernandez Gonzalez",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 5
+                },
+                {
+                    "Documento": "6421245",
+                    "Nombres_Apellidos": "Luanni Yeliana Fernandez Gonzalez",
+                    "Posicion": 3,
+                    "Tipificacion": "NO_CONTACTOS-NO CONTESTAN---",
+                    "Cantidad": 5
+                },
+                {
+                    "Documento": "6421245",
+                    "Nombres_Apellidos": "Luanni Yeliana Fernandez Gonzalez",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 5
+                },
+                {
+                    "Documento": "6421245",
+                    "Nombres_Apellidos": "Luanni Yeliana Fernandez Gonzalez",
+                    "Posicion": 5,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-APLICA CIUDAD PERO NO HAY COBERTURA BI-",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "1024489981",
+                    "Nombres_Apellidos": "Luz Stella Mendez Mongui",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 266
+                },
+                {
+                    "Documento": "1024489981",
+                    "Nombres_Apellidos": "Luz Stella Mendez Mongui",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 11
+                },
+                {
+                    "Documento": "1024489981",
+                    "Nombres_Apellidos": "Luz Stella Mendez Mongui",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR--",
+                    "Cantidad": 4
+                },
+                {
+                    "Documento": "1024489981",
+                    "Nombres_Apellidos": "Luz Stella Mendez Mongui",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-VENTA-FIJO--",
+                    "Cantidad": 3
+                },
+                {
+                    "Documento": "1024489981",
+                    "Nombres_Apellidos": "Luz Stella Mendez Mongui",
+                    "Posicion": 5,
+                    "Tipificacion": "NO_CONTACTOS-TELEFONO OCUPADO---",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "1006822744",
+                    "Nombres_Apellidos": "Maria Camila Cuesta Tisoy",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 256
+                },
+                {
+                    "Documento": "1006822744",
+                    "Nombres_Apellidos": "Maria Camila Cuesta Tisoy",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 112
+                },
+                {
+                    "Documento": "1006822744",
+                    "Nombres_Apellidos": "Maria Camila Cuesta Tisoy",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-INTERNET-",
+                    "Cantidad": 6
+                },
+                {
+                    "Documento": "1006822744",
+                    "Nombres_Apellidos": "Maria Camila Cuesta Tisoy",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR--",
+                    "Cantidad": 5
+                },
+                {
+                    "Documento": "1006822744",
+                    "Nombres_Apellidos": "Maria Camila Cuesta Tisoy",
+                    "Posicion": 5,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-APLICA CIUDAD PERO NO HAY COBERTURA BI-",
+                    "Cantidad": 3
+                },
+                {
+                    "Documento": "1005663580",
+                    "Nombres_Apellidos": "Mayra Alejandra Renteria Negrete",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 200
+                },
+                {
+                    "Documento": "1005663580",
+                    "Nombres_Apellidos": "Mayra Alejandra Renteria Negrete",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 115
+                },
+                {
+                    "Documento": "1005663580",
+                    "Nombres_Apellidos": "Mayra Alejandra Renteria Negrete",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 3
+                },
+                {
+                    "Documento": "1005663580",
+                    "Nombres_Apellidos": "Mayra Alejandra Renteria Negrete",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-VENTA-FIJO--",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "1005663580",
+                    "Nombres_Apellidos": "Mayra Alejandra Renteria Negrete",
+                    "Posicion": 5,
+                    "Tipificacion": "NO_CONTACTOS-TELEFONO OCUPADO---",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "1027952240",
+                    "Nombres_Apellidos": "Melissa Munoz Martinez",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 160
+                },
+                {
+                    "Documento": "1027952240",
+                    "Nombres_Apellidos": "Melissa Munoz Martinez",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 143
+                },
+                {
+                    "Documento": "1027952240",
+                    "Nombres_Apellidos": "Melissa Munoz Martinez",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 4
+                },
+                {
+                    "Documento": "1027952240",
+                    "Nombres_Apellidos": "Melissa Munoz Martinez",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR--",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1027952240",
+                    "Nombres_Apellidos": "Melissa Munoz Martinez",
+                    "Posicion": 5,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-VENTA-FIJO--",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1077841231",
+                    "Nombres_Apellidos": "Natalia Andrea Medina Aviles",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 241
+                },
+                {
+                    "Documento": "1077841231",
+                    "Nombres_Apellidos": "Natalia Andrea Medina Aviles",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-VENTA-FIJO--",
+                    "Cantidad": 2
+                },
+                {
+                    "Documento": "1077841231",
+                    "Nombres_Apellidos": "Natalia Andrea Medina Aviles",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-VENTA -MOVIL--",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1077841231",
+                    "Nombres_Apellidos": "Natalia Andrea Medina Aviles",
+                    "Posicion": 4,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1077841231",
+                    "Nombres_Apellidos": "Natalia Andrea Medina Aviles",
+                    "Posicion": 5,
+                    "Tipificacion": "NO_CONTACTOS-TELEFONO OCUPADO---",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1025524704",
+                    "Nombres_Apellidos": "Sandy Yineht Prieto Vargas",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 227
+                },
+                {
+                    "Documento": "1025524704",
+                    "Nombres_Apellidos": "Sandy Yineht Prieto Vargas",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-VENTA-FIJO--",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1001097179",
+                    "Nombres_Apellidos": "Sergio Eduardo Rojas Duarte",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Cantidad": 477
+                },
+                {
+                    "Documento": "1001097179",
+                    "Nombres_Apellidos": "Sergio Eduardo Rojas Duarte",
+                    "Posicion": 2,
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Cantidad": 4
+                },
+                {
+                    "Documento": "1001097179",
+                    "Nombres_Apellidos": "Sergio Eduardo Rojas Duarte",
+                    "Posicion": 3,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-VENTA-FIJO--",
+                    "Cantidad": 1
+                },
+                {
+                    "Documento": "1005412447",
+                    "Nombres_Apellidos": "Wendy Vanessa Rivera Anaya",
+                    "Posicion": 1,
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-PERMANENCIA ACTIVA CON OTRO OPERADOR--",
+                    "Cantidad": 7
                 }
             ]
         };
@@ -850,6 +1530,27 @@
             tbody.innerHTML = html;
         }
 
+        function renderAgentes(data) {
+            const tbody = document.querySelector('#table-agentes tbody');
+            if (!tbody) return;
+            let html = '';
+
+            if (!data.top5Agentes || data.top5Agentes.length === 0) {
+                html = '<tr><td colspan="5" style="text-align:center;">No hay datos de Top 5 por Asesor</td></tr>';
+            } else {
+                data.top5Agentes.forEach(row => {
+                    html += `<tr>`;
+                    html += `    <td>${row.Documento || ''}</td>`;
+                    html += `    <td style="font-weight: 500;">${row.Nombres_Apellidos || ''}</td>`;
+                    html += `    <td style="text-align: center;"><span style="background: #eef2ff; color: #4f46e5; padding: 2px 8px; border-radius: 12px; font-weight: bold; font-size: 0.85em;">#${row.Posicion}</span></td>`;
+                    html += `    <td>${row.Tipificacion || 'Sin Tipificar'}</td>`;
+                    html += `    <td class="number" style="font-weight: bold;">${row.Cantidad}</td>`;
+                    html += `</tr>`;
+                });
+            }
+            tbody.innerHTML = html;
+        }
+
         function openTab(evt, tabName) {
             const tabContents = document.getElementsByClassName('tab-content');
             for (let i = 0; i < tabContents.length; i++) {
@@ -919,6 +1620,7 @@
 
             renderOrigenVentas(dataJulio);
             renderTipificacion(dataJulio);
+            renderAgentes(dataJulio);
         });
     </script>
 </body>
