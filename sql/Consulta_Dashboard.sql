@@ -3,9 +3,10 @@
 -- Optimizada: Usa tablas temporales con PRIMARY KEY en vez de CTEs
 -- Esto materializa cada paso y permite JOINs indexados en los pasos siguientes.
 --
--- Para cambiar de mes:
---   1. Cambiar '202607' / 202607 al periodo deseado
---   2. Cambiar las fechas '2026-07-01' y '2026-07-31'
+-- -- Para cambiar de mes:
+--   1. El periodo de la base asignada es '202608'
+--   2. Cambiar m.periodo a 202608 para marcaciones
+--   3. Cambiar las fechas de venta a '2026-08-01' y '2026-08-31' con filtro 'INSTALADO'
 -- ==============================================================================
 
 -- Evitar bloqueos y deadlocks en tablas productivas al realizar lecturas masivas
@@ -15,13 +16,20 @@ SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 DROP TEMPORARY TABLE IF EXISTS tmp_base_hogar;
 CREATE TEMPORARY TABLE tmp_base_hogar AS
 SELECT
-    telenum AS Celular1,
-    MAX(numeroidentificacion) AS NumeroIdentificacion
-FROM bbdd_cs_bog_tmk.tb_asignacion_hogar_p21
-WHERE periodo = '202607'
-  AND NombreCampaña = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
-  AND LENGTH(telenum) = 10
-GROUP BY telenum;
+    phone AS Celular1,
+    MAX(numero_identificacion) AS NumeroIdentificacion,
+    MAX(id_asignacion) AS id_asignacion
+FROM bbdd_cs_bog_tmk.tb_bd_gestion_asignacion_phone_dts
+WHERE periodo = 202608
+  AND nombre_campana = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
+  AND LENGTH(phone) = 10
+  AND id_asignacion NOT IN (
+      SELECT idasignacion FROM bbdd_cs_bog_tmk.tb_asignacion_claro_tmk 
+      WHERE periodo = '202608' 
+        AND nombrecampana = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
+        AND TRIM(UPPER(ciudad)) IN ('DOSQUEBRADAS', 'LA DORADA', 'PEREIRA', 'SANTA ROSA DE CABAL')
+  )
+GROUP BY phone;
 
 ALTER TABLE tmp_base_hogar ADD PRIMARY KEY (Celular1);
 
@@ -48,23 +56,41 @@ SELECT
     m.call_date
 FROM bbdd_cs_bog_tmk.tb_marcaciones_desgloce_dts m
 INNER JOIN tmp_base_hogar b ON m.phone_number_dialed = b.Celular1
-WHERE m.periodo = 202607
+WHERE m.periodo = 202608
   AND m.campana = 'HOGAR';
 
 ALTER TABLE tmp_marc_filtradas ADD INDEX idx_tel (phone_number_dialed);
 
--- PASO 2b: Ultima llamada por telefono (ROW_NUMBER sobre tabla ya filtrada y pequeña)
-DROP TEMPORARY TABLE IF EXISTS tmp_ultima_llamada;
-CREATE TEMPORARY TABLE tmp_ultima_llamada AS
-SELECT phone_number_dialed, status, gestionado, contacto, contacto_efectivo
+-- PASO 2b: Obtener tipificación ganadora en orden de prioridad (sin reabrir tabla temporal en un solo query)
+DROP TEMPORARY TABLE IF EXISTS tmp_status_ganador;
+CREATE TEMPORARY TABLE tmp_status_ganador AS
+SELECT phone_number_dialed, status
 FROM (
     SELECT
-        phone_number_dialed, status, gestionado, contacto, contacto_efectivo,
-        ROW_NUMBER() OVER(PARTITION BY phone_number_dialed
-                          ORDER BY prioridad ASC, call_date DESC) AS fila
+        phone_number_dialed,
+        status,
+        ROW_NUMBER() OVER(
+            PARTITION BY phone_number_dialed
+            ORDER BY prioridad ASC, call_date DESC
+        ) AS rn
     FROM tmp_marc_filtradas
 ) sub
-WHERE fila = 1;
+WHERE rn = 1;
+
+ALTER TABLE tmp_status_ganador ADD PRIMARY KEY (phone_number_dialed);
+
+-- PASO 2c: Agregación MAX() por teléfono uniendo el status ganador
+DROP TEMPORARY TABLE IF EXISTS tmp_ultima_llamada;
+CREATE TEMPORARY TABLE tmp_ultima_llamada AS
+SELECT 
+    m.phone_number_dialed,
+    s.status,
+    MAX(m.gestionado) AS gestionado,
+    MAX(m.contacto) AS contacto,
+    MAX(m.contacto_efectivo) AS contacto_efectivo
+FROM tmp_marc_filtradas m
+LEFT JOIN tmp_status_ganador s ON m.phone_number_dialed = s.phone_number_dialed
+GROUP BY m.phone_number_dialed, s.status;
 
 ALTER TABLE tmp_ultima_llamada ADD PRIMARY KEY (phone_number_dialed);
 
@@ -72,11 +98,14 @@ ALTER TABLE tmp_ultima_llamada ADD PRIMARY KEY (phone_number_dialed);
 DROP TEMPORARY TABLE IF EXISTS tmp_arbol_dash;
 CREATE TEMPORARY TABLE tmp_arbol_dash AS
 SELECT STATUS, MAX(CONCATENADO) AS CONCATENADO, MAX(TIPO_CONTACTO) AS TIPO_CONTACTO
-FROM bbdd_cs_bog_tmk.tb_arbol_tmk_bogota_rp
+FROM (
+    SELECT STATUS, CONCATENADO, TIPO_CONTACTO FROM bbdd_cs_bog_tmk.tb_arbol_tmk_bogota
+    UNION ALL
+    SELECT STATUS, CONCATENADO, TIPO_CONTACTO FROM bbdd_cs_bog_tmk.tb_arbol_tmk_bogota_rp_v2
+) t_arbol
 GROUP BY STATUS;
 
--- PASO 4: Ventas cruzadas por TELEFONO y por CEDULA (sin doble conteo)
--- Logica:
+-- PASO 3: Materializar las ventas de hogar que cruzan con la base y desduplicarlas
 --   Bloque 1: venta cuyo NUMERO DE VENTA coincide con Celular1 de la base
 --   Bloque 2: venta cuya CEDULA coincide con NumeroIdentificacion de la base
 --             PERO su NUMERO DE VENTA NO esta en la base (evita duplicados)
@@ -88,8 +117,9 @@ FROM (
     SELECT b.Celular1 AS celular_base, v.ptar, v.INTERNET AS internet, v.VOZ AS telefonia, v.TV AS television
     FROM bbdd_cs_bog_tmk.tb_crudo_ventas_hogar v
     INNER JOIN tmp_base_hogar b ON v.`NUMERO DE VENTA` = b.Celular1
-    WHERE v.`FECHA DE VENTA` >= '2026-07-01'
-      AND v.`FECHA DE VENTA` <= '2026-07-31'
+    WHERE v.`FECHA DE VENTA` >= '2026-08-01'
+      AND v.`FECHA DE VENTA` <= '2026-08-31'
+      AND v.`ESTADO FINAL` = 'INSTALADO'
 
     UNION ALL
 
@@ -98,8 +128,9 @@ FROM (
     FROM bbdd_cs_bog_tmk.tb_crudo_ventas_hogar v
     INNER JOIN tmp_base_hogar_2  b  ON v.cedula_cliente   = b.NumeroIdentificacion
     LEFT  JOIN tmp_base_phones bp ON v.`NUMERO DE VENTA` = bp.Celular1
-    WHERE v.`FECHA DE VENTA` >= '2026-07-01'
-      AND v.`FECHA DE VENTA` <= '2026-07-31'
+    WHERE v.`FECHA DE VENTA` >= '2026-08-01'
+      AND v.`FECHA DE VENTA` <= '2026-08-31'
+      AND v.`ESTADO FINAL` = 'INSTALADO'
       AND bp.Celular1 IS NULL  -- excluir si ya lo encontro el bloque 1
 ) combined
 GROUP BY celular_base;
@@ -144,12 +175,12 @@ SELECT
     END AS CHAR), '0') AS Valor
 FROM (
     SELECT
-        COUNT(DISTINCT b.Celular1)                                                                                        AS base_entregada,
-        SUM(COALESCE(u.gestionado, 0))                                                                                    AS base_gestionada,
-        SUM(COALESCE(u.contacto, 0))                                                                                      AS base_contactada,
-        SUM(COALESCE(u.contacto_efectivo, 0))                                                                             AS contactos_efectivos,
-        SUM(CASE WHEN COALESCE(u.contacto, 0) = 1 AND COALESCE(u.contacto_efectivo, 0) = 0 THEN 1 ELSE 0 END)            AS contactos_no_efectivos,
-        SUM(CASE WHEN COALESCE(u.gestionado, 0) = 1 AND COALESCE(u.contacto, 0) = 0 THEN 1 ELSE 0 END)                   AS no_contactos,
+        COUNT(DISTINCT b.id_asignacion)                                                                                   AS base_entregada,
+        COUNT(DISTINCT CASE WHEN u.phone_number_dialed IS NOT NULL THEN b.id_asignacion END)                              AS base_gestionada,
+        COUNT(DISTINCT CASE WHEN COALESCE(u.contacto, 0) = 1 THEN b.id_asignacion END)                                    AS base_contactada,
+        COUNT(DISTINCT CASE WHEN COALESCE(u.contacto_efectivo, 0) = 1 THEN b.id_asignacion END)                           AS contactos_efectivos,
+        COUNT(DISTINCT CASE WHEN COALESCE(u.contacto, 0) = 1 AND COALESCE(u.contacto_efectivo, 0) = 0 THEN b.id_asignacion END) AS contactos_no_efectivos,
+        COUNT(DISTINCT CASE WHEN u.phone_number_dialed IS NOT NULL AND COALESCE(u.contacto, 0) = 0 THEN b.id_asignacion END) AS no_contactos,
 
         SUM(CASE WHEN d.PTAR7 IN ('5116','5116_F') AND d.internet = 1 THEN 1 ELSE 0 END)                                 AS ventas_hogares_5116,
         SUM(CASE WHEN d.PTAR7 IN ('5116','5116_F') THEN COALESCE(d.internet,0)+COALESCE(d.telefonia,0)+COALESCE(d.television,0) ELSE 0 END) AS ventas_servicios_5116,

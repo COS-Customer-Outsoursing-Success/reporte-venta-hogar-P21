@@ -8,17 +8,24 @@
 -- Evitar bloqueos y deadlocks en tablas productivas al realizar lecturas masivas
 SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
--- Paso 1: Base P21 de Julio (una fila por telefono unico)
+-- Paso 1: Base P21 de Agosto (una fila por telefono unico)
 DROP TEMPORARY TABLE IF EXISTS tmp_base_p21;
 CREATE TEMPORARY TABLE tmp_base_p21 AS
 SELECT
-    telenum AS Celular1,
-    MAX(numeroidentificacion) AS NumeroIdentificacion
-FROM bbdd_cs_bog_tmk.tb_asignacion_hogar_p21
-WHERE periodo = '202607'
-  AND NombreCampaña = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
-  AND LENGTH(telenum) = 10
-GROUP BY telenum;
+    phone AS Celular1,
+    MAX(numero_identificacion) AS NumeroIdentificacion,
+    MAX(id_asignacion) AS id_asignacion
+FROM bbdd_cs_bog_tmk.tb_bd_gestion_asignacion_phone_dts
+WHERE periodo = 202608
+  AND nombre_campana = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
+  AND LENGTH(phone) = 10
+  AND id_asignacion NOT IN (
+      SELECT idasignacion FROM bbdd_cs_bog_tmk.tb_asignacion_claro_tmk 
+      WHERE periodo = '202608' 
+        AND nombrecampana = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
+        AND TRIM(UPPER(ciudad)) IN ('DOSQUEBRADAS', 'LA DORADA', 'PEREIRA', 'SANTA ROSA DE CABAL')
+  )
+GROUP BY phone;
 
 ALTER TABLE tmp_base_p21 ADD PRIMARY KEY (Celular1);
 
@@ -32,7 +39,7 @@ DROP TEMPORARY TABLE IF EXISTS tmp_base_p21_2;
 CREATE TEMPORARY TABLE tmp_base_p21_2 AS SELECT * FROM tmp_base_p21;
 ALTER TABLE tmp_base_p21_2 ADD PRIMARY KEY (Celular1);
 
--- Paso 2: Ventas de Julio - cruce por TELEFONO y por CEDULA (sin doble conteo)
+-- Paso 2: Ventas de Agosto - cruce por TELEFONO y por CEDULA (sin doble conteo)
 DROP TEMPORARY TABLE IF EXISTS tmp_ventas_p1;
 CREATE TEMPORARY TABLE tmp_ventas_p1 AS
 SELECT celular_base, MAX(ptar) AS canal
@@ -41,8 +48,9 @@ FROM (
     SELECT b.Celular1 AS celular_base, v.ptar
     FROM bbdd_cs_bog_tmk.tb_crudo_ventas_hogar v
     INNER JOIN tmp_base_p21 b ON v.`NUMERO DE VENTA` = b.Celular1
-    WHERE v.`FECHA DE VENTA` >= '2026-07-01'
-      AND v.`FECHA DE VENTA` <= '2026-07-31'
+    WHERE v.`FECHA DE VENTA` >= '2026-08-01'
+      AND v.`FECHA DE VENTA` <= '2026-08-31'
+      AND v.`ESTADO FINAL` = 'INSTALADO'
 
     UNION ALL
 
@@ -51,8 +59,9 @@ FROM (
     FROM bbdd_cs_bog_tmk.tb_crudo_ventas_hogar v
     INNER JOIN tmp_base_p21_2      b  ON v.cedula_cliente  = b.NumeroIdentificacion
     LEFT  JOIN tmp_base_p21_phones bp ON v.`NUMERO DE VENTA` = bp.Celular1
-    WHERE v.`FECHA DE VENTA` >= '2026-07-01'
-      AND v.`FECHA DE VENTA` <= '2026-07-31'
+    WHERE v.`FECHA DE VENTA` >= '2026-08-01'
+      AND v.`FECHA DE VENTA` <= '2026-08-31'
+      AND v.`ESTADO FINAL` = 'INSTALADO'
       AND bp.Celular1 IS NULL
 ) combined
 GROUP BY celular_base;

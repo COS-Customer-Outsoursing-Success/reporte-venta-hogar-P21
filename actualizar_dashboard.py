@@ -41,6 +41,7 @@ def main():
     sql_path = os.path.join("sql", "Consulta_Dashboard.sql")
     sql_parte1_path = os.path.join("sql", "Analisis_Adicional_Parte1.sql")
     sql_parte2_path = os.path.join("sql", "Analisis_Adicional_Parte2.sql")
+    sql_agentes_path = os.path.join("sql", "Top5_Tipificaciones_Agentes.sql")
     
     if not os.path.exists(sql_path):
         print(f"❌ No se encontró el archivo {sql_path}")
@@ -52,6 +53,8 @@ def main():
         sql_parte1 = f.read()
     with open(sql_parte2_path, "r", encoding="utf-8") as f:
         sql_parte2 = f.read()
+    with open(sql_agentes_path, "r", encoding="utf-8") as f:
+        sql_agentes = f.read()
 
     # Helper function para extraer el resultado de comandos multiples (con reintentos ante bloqueos)
     def execute_multi_statement(cursor, sql_text, max_retries=3):
@@ -82,6 +85,7 @@ def main():
             results = execute_multi_statement(cursor, sql)
             results_parte1 = execute_multi_statement(cursor, sql_parte1)
             results_parte2 = execute_multi_statement(cursor, sql_parte2)
+            results_agentes = execute_multi_statement(cursor, sql_agentes)
     except Exception as e:
         print(f"❌ Error ejecutando la consulta: {e}")
         return
@@ -130,7 +134,8 @@ def main():
             "Mejores Promociones": data.get("Mejores_Promociones", 0)
         },
         "origenVentas": results_parte1,
-        "detalleTipificacion": results_parte2
+        "detalleTipificacion": results_parte2,
+        "top5Agentes": results_agentes
     }
 
     # 6. Leer y actualizar el HTML
@@ -156,7 +161,7 @@ def main():
     pattern = r"const dataJulio = \{.*?\};"
     replacement = f"const dataJulio = {json_str};"
     
-    new_html = re.sub(pattern, replacement, html_content, flags=re.DOTALL)
+    new_html = re.sub(pattern, lambda m: replacement, html_content, flags=re.DOTALL)
 
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(new_html)

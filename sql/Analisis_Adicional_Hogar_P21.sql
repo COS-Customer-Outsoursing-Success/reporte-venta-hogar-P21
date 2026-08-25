@@ -12,17 +12,25 @@ SELECT
     -- v.cedula_cliente AS documento_venta,
     v.ptar AS canal 
 FROM bbdd_cs_bog_tmk.tb_crudo_ventas_hogar v
-WHERE v.fecha_venta >= '2026-07-01' 
-  AND v.fecha_venta <= '2026-07-31';
+WHERE v.fecha_venta >= '2026-08-01' 
+  AND v.fecha_venta <= '2026-08-31'
+  AND v.`ESTADO FINAL` = 'INSTALADO';
 
 -- 2. Crear temporal de asignación (Base P21)
 CREATE TEMPORARY TABLE tmp_asignacion_hogar AS
-SELECT DISTINCT Celular1 AS phone
+SELECT DISTINCT phone
     -- NOTA PARA CRUCE POR CÉDULA:
     -- Si necesitas cruzar por cédula, descomenta la línea de abajo y ajusta el nombre del campo:
-    -- , Cedula AS documento_asignacion
-FROM bbdd_cs_bog_tmk.tb_asignacion_hogar_p21
-WHERE periodo = 202607; 
+    -- , numero_identificacion AS documento_asignacion
+FROM bbdd_cs_bog_tmk.tb_bd_gestion_asignacion_phone_dts
+WHERE periodo = 202608
+  AND nombre_campana = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
+  AND id_asignacion NOT IN (
+      SELECT idasignacion FROM bbdd_cs_bog_tmk.tb_asignacion_claro_tmk 
+      WHERE periodo = '202608' 
+        AND nombrecampana = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
+        AND TRIM(UPPER(ciudad)) IN ('DOSQUEBRADAS', 'LA DORADA', 'PEREIRA', 'SANTA ROSA DE CABAL')
+  );
 
 -- 3. Crear índices (optimizando para strings)
 ALTER TABLE tmp_asignacion_hogar ADD INDEX idx_phone (phone(50));
@@ -61,13 +69,13 @@ DROP TEMPORARY TABLE IF EXISTS tmp_asignacion_hogar;
 
 SELECT 
     c.CONCATENADO AS Tipificacion_Alarma,
-    COUNT(DISTINCT b.Celular1) AS Gestion,
+    COUNT(DISTINCT b.telenum) AS Gestion,
     COUNT(m.phone_number_dialed) AS Intentos_Totales,
-    ROUND(COUNT(m.phone_number_dialed) / NULLIF(COUNT(DISTINCT b.Celular1), 0), 2) AS Intentos_Por_Registro,
+    ROUND(COUNT(m.phone_number_dialed) / NULLIF(COUNT(DISTINCT b.telenum), 0), 2) AS Intentos_Por_Registro,
     SUM(COALESCE(m.contacto, 0)) AS Contactos,
     SUM(CASE WHEN v.`NUMERO DE VENTA` IS NOT NULL THEN 1 ELSE 0 END) AS Ventas,
-    ROUND(SUM(CASE WHEN v.`NUMERO DE VENTA` IS NOT NULL THEN 1 ELSE 0 END) * 100.0 / NULLIF(COUNT(DISTINCT b.Celular1), 0), 2) AS Efectividad_Porcentaje
-FROM bbdd_cs_bog_tmk.tb_asignacion_hogar_p21 b
+    ROUND(SUM(CASE WHEN v.`NUMERO DE VENTA` IS NOT NULL THEN 1 ELSE 0 END) * 100.0 / NULLIF(COUNT(DISTINCT b.telenum), 0), 2) AS Efectividad_Porcentaje
+FROM bbdd_cs_bog_tmk.tb_asignacion_claro_tmk b
 -- Cruzamos con la última llamada (o resumen de llamadas) por tipificación
 INNER JOIN (
     SELECT 
@@ -77,22 +85,26 @@ INNER JOIN (
         contacto_efectivo,
         ROW_NUMBER() OVER(PARTITION BY phone_number_dialed ORDER BY prioridad ASC, call_date DESC) as fila
     FROM bbdd_cs_bog_tmk.tb_marcaciones_desgloce_dts
-    WHERE periodo = 202607 AND campana = 'HOGAR'
-) m ON b.Celular1 = m.phone_number_dialed AND m.fila = 1
+    WHERE periodo = 202608 AND campana = 'HOGAR'
+) m ON b.telenum = m.phone_number_dialed AND m.fila = 1
 LEFT JOIN (
     SELECT STATUS, MAX(CONCATENADO) AS CONCATENADO 
-    FROM bbdd_cs_bog_tmk.tb_arbol_tmk_bogota_rp 
+    FROM bbdd_cs_bog_tmk.tb_arbol_tmk_bogota
     GROUP BY STATUS
 ) c ON m.status = c.STATUS
 LEFT JOIN (
     SELECT `NUMERO DE VENTA`
     FROM bbdd_cs_bog_tmk.tb_crudo_ventas_hogar
+    WHERE fecha_venta >= '2026-08-01' AND fecha_venta <= '2026-08-31'
+      AND `ESTADO FINAL` = 'INSTALADO'
     GROUP BY `NUMERO DE VENTA`
-) v ON b.Celular1 = v.`NUMERO DE VENTA`
+) v ON b.telenum = v.`NUMERO DE VENTA`
 -- NOTA PARA CRUCE POR CÉDULA:
 -- El cruce con ventas (v) debería cambiarse para usar cédula si es más preciso:
--- ON b.Cedula = v.Cedula
-WHERE b.periodo = 202607
+-- ON b.numeroidentificacion = v.cedula_cliente
+WHERE b.periodo = '202608'
+  AND b.nombrecampana = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
+  AND TRIM(UPPER(b.ciudad)) NOT IN ('DOSQUEBRADAS', 'LA DORADA', 'PEREIRA', 'SANTA ROSA DE CABAL')
 GROUP BY 
     c.CONCATENADO
 ORDER BY 

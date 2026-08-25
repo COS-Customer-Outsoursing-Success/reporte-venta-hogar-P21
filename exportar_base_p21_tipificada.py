@@ -18,9 +18,9 @@ SQL_TEMP_TABLES = """
 -- Evitar bloqueos y deadlocks en tablas productivas al realizar lecturas masivas
 SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
--- Paso 1: Materializar las marcaciones de Julio-HOGAR ANTES del ROW_NUMBER
-DROP TEMPORARY TABLE IF EXISTS tmp_marc_julio;
-CREATE TEMPORARY TABLE tmp_marc_julio AS
+-- Paso 1: Materializar las marcaciones de Agosto-HOGAR ANTES del ROW_NUMBER
+DROP TEMPORARY TABLE IF EXISTS tmp_marc_agosto;
+CREATE TEMPORARY TABLE tmp_marc_agosto AS
 SELECT
     phone_number_dialed,
     status,
@@ -30,16 +30,16 @@ SELECT
     prioridad,
     call_date
 FROM bbdd_cs_bog_tmk.tb_marcaciones_desgloce_dts
-WHERE periodo = 202607
+WHERE periodo = 202608
   AND campana = 'HOGAR';
 
-ALTER TABLE tmp_marc_julio ADD INDEX idx_tel (phone_number_dialed);
+ALTER TABLE tmp_marc_agosto ADD INDEX idx_tel (phone_number_dialed);
 
 -- Paso 2: Total de intentos por telefono
 DROP TEMPORARY TABLE IF EXISTS tmp_intentos;
 CREATE TEMPORARY TABLE tmp_intentos AS
 SELECT phone_number_dialed, COUNT(*) AS intentos
-FROM tmp_marc_julio
+FROM tmp_marc_agosto
 GROUP BY phone_number_dialed;
 
 ALTER TABLE tmp_intentos ADD PRIMARY KEY (phone_number_dialed);
@@ -53,7 +53,7 @@ FROM (
         phone_number_dialed, status, gestionado, contacto, contacto_efectivo, call_date,
         ROW_NUMBER() OVER(PARTITION BY phone_number_dialed
                           ORDER BY prioridad ASC, call_date DESC) AS fila
-    FROM tmp_marc_julio
+    FROM tmp_marc_agosto
 ) sub
 WHERE fila = 1;
 
@@ -63,38 +63,42 @@ ALTER TABLE tmp_ultima ADD PRIMARY KEY (phone_number_dialed);
 DROP TEMPORARY TABLE IF EXISTS tmp_arbol;
 CREATE TEMPORARY TABLE tmp_arbol AS
 SELECT STATUS, MAX(CONCATENADO) AS CONCATENADO
-FROM bbdd_cs_bog_tmk.tb_arbol_tmk_bogota_rp
+FROM (
+    SELECT STATUS, CONCATENADO FROM bbdd_cs_bog_tmk.tb_arbol_tmk_bogota
+    UNION ALL
+    SELECT STATUS, CONCATENADO FROM bbdd_cs_bog_tmk.tb_arbol_tmk_bogota_rp_v2
+) t_arbol
 GROUP BY STATUS;
 
--- Paso 5: Ventas de Julio - cruce por TELEFONO y por CEDULA (sin doble conteo)
+-- Paso 5: Ventas de Agosto - cruce por TELEFONO y por CEDULA (sin doble conteo)
 DROP TEMPORARY TABLE IF EXISTS tmp_ventas_tel;
 CREATE TEMPORARY TABLE tmp_ventas_tel AS
 SELECT celular_base
 FROM (
     -- Match 1: por numero de telefono
-    SELECT b.Celular1 AS celular_base
+    SELECT b.telenum AS celular_base
     FROM bbdd_cs_bog_tmk.tb_crudo_ventas_hogar v
-    INNER JOIN bbdd_cs_bog_tmk.tb_asignacion_hogar_p21 b
+    INNER JOIN bbdd_cs_bog_tmk.tb_asignacion_claro_tmk b
         ON v.`NUMERO DE VENTA` = b.telenum
-    WHERE v.`FECHA DE VENTA` >= '2026-07-01'
-      AND v.`FECHA DE VENTA` <= '2026-07-31'
-      AND b.periodo = '202607'
-      AND b.NombreCampaña = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
+    WHERE v.`FECHA DE VENTA` >= '2026-08-01'
+      AND v.`FECHA DE VENTA` <= '2026-08-31'
+      AND b.periodo = '202608'
+      AND b.nombrecampana = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
       AND LENGTH(b.telenum) = 10
 
     UNION ALL
 
     -- Match 2: por cedula_cliente, solo si el telefono de la venta NO esta en la base
-    SELECT b.Celular1 AS celular_base
+    SELECT b.telenum AS celular_base
     FROM bbdd_cs_bog_tmk.tb_crudo_ventas_hogar v
-    INNER JOIN bbdd_cs_bog_tmk.tb_asignacion_hogar_p21 b
-        ON v.cedula_cliente = b.NumeroIdentificacion
-    LEFT JOIN bbdd_cs_bog_tmk.tb_asignacion_hogar_p21 b2
-        ON v.`NUMERO DE VENTA` = b2.telenum AND b2.periodo = '202607'
-    WHERE v.`FECHA DE VENTA` >= '2026-07-01'
-      AND v.`FECHA DE VENTA` <= '2026-07-31'
-      AND b.periodo = '202607'
-      AND b.NombreCampaña = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
+    INNER JOIN bbdd_cs_bog_tmk.tb_asignacion_claro_tmk b
+        ON v.cedula_cliente = b.numeroidentificacion
+    LEFT JOIN bbdd_cs_bog_tmk.tb_asignacion_claro_tmk b2
+        ON v.`NUMERO DE VENTA` = b2.telenum AND b2.periodo = '202608'
+    WHERE v.`FECHA DE VENTA` >= '2026-08-01'
+      AND v.`FECHA DE VENTA` <= '2026-08-31'
+      AND b.periodo = '202608'
+      AND b.nombrecampana = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
       AND LENGTH(b.telenum) = 10
       AND b2.telenum IS NULL
 ) combined
@@ -113,14 +117,20 @@ SELECT
     COALESCE(u.contacto, 0)                     AS Es_Contacto,
     COALESCE(u.contacto_efectivo, 0)            AS Es_Contacto_Efectivo,
     CASE WHEN v.celular_base IS NOT NULL THEN 'SI' ELSE 'NO' END AS Venta_Hogar_Confirmada
-FROM bbdd_cs_bog_tmk.tb_asignacion_hogar_p21 b
-INNER JOIN tmp_ultima u      ON b.Celular1 = u.phone_number_dialed
-LEFT  JOIN tmp_intentos i    ON b.Celular1 = i.phone_number_dialed
+FROM bbdd_cs_bog_tmk.tb_asignacion_claro_tmk b
+INNER JOIN tmp_ultima u      ON b.telenum = u.phone_number_dialed
+LEFT  JOIN tmp_intentos i    ON b.telenum = i.phone_number_dialed
 LEFT  JOIN tmp_arbol c       ON u.status   = c.STATUS
-LEFT  JOIN tmp_ventas_tel v  ON b.Celular1 = v.celular_base
-WHERE b.periodo = '202607'
-  AND b.NombreCampaña = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
+LEFT  JOIN tmp_ventas_tel v  ON b.telenum = v.celular_base
+WHERE b.periodo = '202608'
+  AND b.nombrecampana = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
   AND LENGTH(b.telenum) = 10
+  AND b.idasignacion NOT IN (
+    SELECT idasignacion FROM bbdd_cs_bog_tmk.tb_asignacion_claro_tmk 
+    WHERE periodo = '202608' 
+      AND nombrecampana = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
+      AND TRIM(UPPER(ciudad)) IN ('DOSQUEBRADAS', 'LA DORADA', 'PEREIRA', 'SANTA ROSA DE CABAL')
+  )
 ORDER BY b.telenum;
 """
 
@@ -144,7 +154,7 @@ def execute_multi_statement(cursor, sql_text, max_retries=3):
                 raise
 
 def main():
-    output_filename = "base_p21_tipificados_julio_2026.csv"
+    output_filename = "base_p21_tipificados_agosto_2026.csv"
     output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), output_filename)
 
     print("🚀 Conectando a MySQL y preparando la exportación de tipificaciones...")

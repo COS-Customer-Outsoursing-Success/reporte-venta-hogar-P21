@@ -7,12 +7,12 @@
 WITH tmp_base_hogar AS (
     -- Paso 1: Obtener la base asignada para el periodo
     SELECT 
-        telenum as Celular1, 
-        numeroidentificacion as NumeroIdentificacion
-    FROM bbdd_cs_bog_tmk.tb_asignacion_hogar_p21  
-    WHERE periodo = '202607'                      -- CAMBIAR MES AQUÍ (ej. '202607')
-      AND NombreCampaña = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
-      AND LENGTH(telenum) = 10
+        phone as Celular1, 
+        numero_identificacion as NumeroIdentificacion
+    FROM bbdd_cs_bog_tmk.tb_bd_gestion_asignacion_phone_dts  
+    WHERE periodo = 202608                      -- CAMBIAR MES AQUÍ (ej. 202608)
+      AND nombre_campana = 'CROSSELLING_MOVIL_SIN_HOGAR_P21'
+      AND LENGTH(phone) = 10
 ),
 tmp_ultima_llamada AS (
     -- Paso 2: Obtener el estado de la última llamada de vicidial
@@ -30,8 +30,8 @@ tmp_ultima_llamada AS (
             ROW_NUMBER() OVER(PARTITION BY v.phone_number_dialed ORDER BY v.call_date DESC) as fila
         FROM bbdd_bigdata_marcaciones_vicidial.tb_marcaciones_vicidial_out_tmk_bog v
         INNER JOIN tmp_base_hogar b ON v.phone_number_dialed = b.Celular1
-        WHERE v.call_date >= '2026-07-01 00:00:00' -- CAMBIAR FECHA INICIAL AQUÍ
-          AND v.call_date < '2026-08-01 00:00:00'  -- CAMBIAR FECHA FINAL AQUÍ
+        WHERE v.call_date >= '2026-08-01 00:00:00' -- CAMBIAR FECHA INICIAL AQUÍ
+          AND v.call_date < '2026-09-01 00:00:00'  -- CAMBIAR FECHA FINAL AQUÍ
           AND v.campaign_id = 'PTMKBOHG'
     ) sub
     WHERE fila = 1
@@ -48,8 +48,12 @@ FROM tmp_base_hogar b
 INNER JOIN tmp_ultima_llamada u ON b.Celular1 = u.phone_number_dialed
 INNER JOIN (
     SELECT STATUS, MAX(CONCATENADO) AS CONCATENADO, MAX(TIPO_CONTACTO) AS TIPO_CONTACTO 
-    FROM bbdd_cs_bog_tmk.tb_arbol_tmk_bogota_rp 
+    FROM (
+        SELECT STATUS, CONCATENADO, TIPO_CONTACTO FROM bbdd_cs_bog_tmk.tb_arbol_tmk_bogota
+        UNION ALL
+        SELECT STATUS, CONCATENADO, TIPO_CONTACTO FROM bbdd_cs_bog_tmk.tb_arbol_tmk_bogota_rp_v2
+    ) t_arbol
     GROUP BY STATUS
 ) c ON u.status = c.STATUS
-WHERE c.TIPO_CONTACTO = 'CONTACTOS EFECTIVOS' 
+WHERE c.TIPO_CONTACTO IN ('CONTACTOS_EFECTIVOS', 'CONTACTOS EFECTIVOS')
   AND COALESCE(u.aht_seg, 0) >= 180;
