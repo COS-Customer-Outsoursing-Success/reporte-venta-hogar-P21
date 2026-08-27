@@ -534,13 +534,13 @@
     <script>
         // Datos Extraídos de la Base de Datos para Julio
         const dataJulio = {
-            "fechaActualizacion": "26/08/2026 07:13:07 AM",
+            "fechaActualizacion": "27/08/2026 07:16:49 AM",
             "baseEntregada": 12885,
-            "baseGestionada": 12868,
-            "baseContactada": 4091,
-            "contactosEfectivos": 3206,
-            "contactosNoEfectivos": 890,
-            "noContactos": 8807,
+            "baseGestionada": 12878,
+            "baseContactada": 9653,
+            "contactosEfectivos": 3293,
+            "contactosNoEfectivos": 6379,
+            "noContactos": 3266,
             "ventasHogares5116": 0,
             "ventasServicios5116": 0,
             "ventasHogares5143": 0,
@@ -551,261 +551,216 @@
             "totalHogaresSoloArroba": 0,
             "totalServicios": 0,
             "venta": 0,
-            "noVenta": 2802,
+            "noVenta": 1240,
             "noVentaDesglose": {
-                "No atractiva la oferta": 2641,
-                "Precio": 2503,
-                "Internet": 108,
-                "TV": 11,
-                "Mala experiencia": 18,
-                "Pide no volver a llamar": 20,
-                "Perm. con otro operador": 10,
+                "No atractiva la oferta": 1170,
+                "Precio": 1101,
+                "Internet": 52,
+                "TV": 8,
+                "Mala experiencia": 9,
+                "Pide no volver a llamar": 8,
+                "Perm. con otro operador": 4,
                 "No Apto Cartera": 1,
-                "Cliente Mintic": 18,
-                "Cliente Corporativo": 4,
-                "Mejores Promociones": 12
+                "Cliente Mintic": 8,
+                "Cliente Corporativo": 2,
+                "Mejores Promociones": 6
             },
             "origenVentas": [],
             "detalleTipificacion": [
                 {
+                    "Tipificacion_Alarma": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
+                    "Gestion": 7911,
+                    "Intentos_Totales": 85713.0,
+                    "Intentos_Por_Registro": 10.83,
+                    "Contactos": 7911.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
                     "Tipificacion_Alarma": "NO_CONTACTOS-TELEFONO OCUPADO---",
-                    "Gestion": 7299,
-                    "Intentos_Totales": 69272.0,
-                    "Intentos_Por_Registro": 9.49,
-                    "Contactos": 0.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Gestion": 2393,
-                    "Intentos_Totales": 20891.0,
-                    "Intentos_Por_Registro": 8.73,
-                    "Contactos": 2393.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Gestion": 945,
-                    "Intentos_Totales": 8418.0,
-                    "Intentos_Por_Registro": 8.91,
-                    "Contactos": 945.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "NO_CONTACTOS-CONTESTADOR---",
-                    "Gestion": 728,
-                    "Intentos_Totales": 6621.0,
-                    "Intentos_Por_Registro": 9.09,
+                    "Gestion": 1685,
+                    "Intentos_Totales": 19129.0,
+                    "Intentos_Por_Registro": 11.35,
                     "Contactos": 0.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
                     "Tipificacion_Alarma": "NO_CONTACTOS-NO CONTESTAN---",
-                    "Gestion": 716,
-                    "Intentos_Totales": 6892.0,
-                    "Intentos_Por_Registro": 9.63,
+                    "Gestion": 1359,
+                    "Intentos_Totales": 15246.0,
+                    "Intentos_Por_Registro": 11.22,
                     "Contactos": 3.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
-                    "Gestion": 185,
-                    "Intentos_Totales": 1776.0,
-                    "Intentos_Por_Registro": 9.6,
-                    "Contactos": 184.0,
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
+                    "Gestion": 999,
+                    "Intentos_Totales": 10285.0,
+                    "Intentos_Por_Registro": 10.3,
+                    "Contactos": 999.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
+                    "Gestion": 418,
+                    "Intentos_Totales": 4394.0,
+                    "Intentos_Por_Registro": 10.51,
+                    "Contactos": 418.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
                     "Gestion": 169,
-                    "Intentos_Totales": 1543.0,
-                    "Intentos_Por_Registro": 9.13,
-                    "Contactos": 112.0,
+                    "Intentos_Totales": 1739.0,
+                    "Intentos_Por_Registro": 10.29,
+                    "Contactos": 130.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "NO_CONTACTOS-CONTESTADOR---",
+                    "Gestion": 148,
+                    "Intentos_Totales": 1509.0,
+                    "Intentos_Por_Registro": 10.2,
+                    "Contactos": 0.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-INTERNET",
-                    "Gestion": 107,
-                    "Intentos_Totales": 954.0,
-                    "Intentos_Por_Registro": 8.92,
-                    "Contactos": 107.0,
+                    "Gestion": 51,
+                    "Intentos_Totales": 545.0,
+                    "Intentos_Por_Registro": 10.69,
+                    "Contactos": 51.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
                     "Tipificacion_Alarma": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR",
-                    "Gestion": 87,
-                    "Intentos_Totales": 784.0,
-                    "Intentos_Por_Registro": 9.01,
-                    "Contactos": 87.0,
+                    "Gestion": 42,
+                    "Intentos_Totales": 441.0,
+                    "Intentos_Por_Registro": 10.5,
+                    "Contactos": 42.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
                     "Tipificacion_Alarma": "NO_CONTACTOS-TELEFONO DESCONECTADO---",
-                    "Gestion": 39,
-                    "Intentos_Totales": 341.0,
-                    "Intentos_Por_Registro": 8.74,
+                    "Gestion": 33,
+                    "Intentos_Totales": 303.0,
+                    "Intentos_Por_Registro": 9.18,
                     "Contactos": 0.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-SIN COBERTURA-BI",
-                    "Gestion": 38,
-                    "Intentos_Totales": 337.0,
-                    "Intentos_Por_Registro": 8.87,
-                    "Contactos": 38.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE SERVICIO EN MISMA DIRECCION A NOMBRE DE OTRA PERSONA",
-                    "Gestion": 38,
-                    "Intentos_Totales": 297.0,
-                    "Intentos_Por_Registro": 7.82,
-                    "Contactos": 38.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_NO_EFECTIVOS-NO HAY CONTACTO CON EL TITULAR",
-                    "Gestion": 25,
-                    "Intentos_Totales": 244.0,
-                    "Intentos_Por_Registro": 9.76,
-                    "Contactos": 25.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "NO_CONTACTOS-NO CONTESTAN",
-                    "Gestion": 22,
-                    "Intentos_Totales": 200.0,
-                    "Intentos_Por_Registro": 9.09,
-                    "Contactos": 0.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR",
-                    "Gestion": 17,
-                    "Intentos_Totales": 159.0,
-                    "Intentos_Por_Registro": 9.35,
-                    "Contactos": 17.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-INTERESADO-HOGAR",
                     "Gestion": 17,
-                    "Intentos_Totales": 170.0,
-                    "Intentos_Por_Registro": 10.0,
+                    "Intentos_Totales": 199.0,
+                    "Intentos_Por_Registro": 11.71,
                     "Contactos": 17.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-MALA EXPERIENCIA CON PROCESOS DE CLARO",
-                    "Gestion": 16,
-                    "Intentos_Totales": 129.0,
-                    "Intentos_Por_Registro": 8.06,
-                    "Contactos": 16.0,
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE SERVICIO EN MISMA DIRECCION A NOMBRE DE OTRA PERSONA",
+                    "Gestion": 17,
+                    "Intentos_Totales": 151.0,
+                    "Intentos_Por_Registro": 8.88,
+                    "Contactos": 17.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-TV",
-                    "Gestion": 11,
-                    "Intentos_Totales": 94.0,
-                    "Intentos_Por_Registro": 8.55,
-                    "Contactos": 11.0,
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-SIN COBERTURA-BI",
+                    "Gestion": 15,
+                    "Intentos_Totales": 154.0,
+                    "Intentos_Por_Registro": 10.27,
+                    "Contactos": 15.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-PERMANENCIA ACTIVA CON OTRO OPERADOR",
-                    "Gestion": 10,
-                    "Intentos_Totales": 97.0,
-                    "Intentos_Por_Registro": 9.7,
-                    "Contactos": 10.0,
+                    "Tipificacion_Alarma": "CONTACTOS_NO_EFECTIVOS-NO HAY CONTACTO CON EL TITULAR",
+                    "Gestion": 14,
+                    "Intentos_Totales": 159.0,
+                    "Intentos_Por_Registro": 11.36,
+                    "Contactos": 14.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-VENTA -EQUIPOS Y TECNOLOGIA-PC - TV - VC",
                     "Gestion": 9,
-                    "Intentos_Totales": 79.0,
-                    "Intentos_Por_Registro": 8.78,
+                    "Intentos_Totales": 94.0,
+                    "Intentos_Por_Registro": 10.44,
                     "Contactos": 9.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-TIGO",
+                    "Tipificacion_Alarma": "NO_CONTACTOS-NO CONTESTAN",
                     "Gestion": 8,
-                    "Intentos_Totales": 51.0,
-                    "Intentos_Por_Registro": 6.38,
+                    "Intentos_Totales": 71.0,
+                    "Intentos_Por_Registro": 8.88,
+                    "Contactos": 0.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-TV",
+                    "Gestion": 8,
+                    "Intentos_Totales": 79.0,
+                    "Intentos_Por_Registro": 9.88,
                     "Contactos": 8.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-YA TIENE INTERNET",
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-MALA EXPERIENCIA CON PROCESOS DE CLARO",
                     "Gestion": 7,
-                    "Intentos_Totales": 57.0,
-                    "Intentos_Por_Registro": 8.14,
+                    "Intentos_Totales": 64.0,
+                    "Intentos_Por_Registro": 9.14,
                     "Contactos": 7.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-TUVO INTERNET HACE MENOS DE 6 MESES",
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR",
                     "Gestion": 6,
-                    "Intentos_Totales": 46.0,
-                    "Intentos_Por_Registro": 7.67,
+                    "Intentos_Totales": 69.0,
+                    "Intentos_Por_Registro": 11.5,
                     "Contactos": 6.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-MEJORES PROMOCIONES-SOMOS",
-                    "Gestion": 5,
-                    "Intentos_Totales": 46.0,
-                    "Intentos_Por_Registro": 9.2,
-                    "Contactos": 5.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-RED NEUTRA",
-                    "Gestion": 5,
-                    "Intentos_Totales": 44.0,
-                    "Intentos_Por_Registro": 8.8,
-                    "Contactos": 5.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-VENTA -EQUIPOS Y TECNOLOGIA-SMARTPHONE - IPHONE-CLARO UP",
                     "Gestion": 4,
-                    "Intentos_Totales": 31.0,
-                    "Intentos_Por_Registro": 7.75,
+                    "Intentos_Totales": 35.0,
+                    "Intentos_Por_Registro": 8.75,
                     "Contactos": 4.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE CORPORATIVO",
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-PERMANENCIA ACTIVA CON OTRO OPERADOR",
                     "Gestion": 4,
-                    "Intentos_Totales": 39.0,
-                    "Intentos_Por_Registro": 9.75,
+                    "Intentos_Totales": 45.0,
+                    "Intentos_Por_Registro": 11.25,
+                    "Contactos": 4.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-VENTA-FIJO",
+                    "Gestion": 4,
+                    "Intentos_Totales": 50.0,
+                    "Intentos_Por_Registro": 12.5,
                     "Contactos": 4.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -813,98 +768,71 @@
                 {
                     "Tipificacion_Alarma": "NO_CONTACTOS-NO HAY CONTACTO CON EL TITULAR---",
                     "Gestion": 4,
-                    "Intentos_Totales": 42.0,
-                    "Intentos_Por_Registro": 10.5,
-                    "Contactos": 3.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE DESCONFIA DE TRAMITES\u00a0 TELEFONICOS",
-                    "Gestion": 4,
-                    "Intentos_Totales": 31.0,
-                    "Intentos_Por_Registro": 7.75,
+                    "Intentos_Totales": 45.0,
+                    "Intentos_Por_Registro": 11.25,
                     "Contactos": 4.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-VENTA-FIJO",
-                    "Gestion": 3,
-                    "Intentos_Totales": 33.0,
-                    "Intentos_Por_Registro": 11.0,
-                    "Contactos": 3.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-MOVISTAR",
-                    "Gestion": 3,
-                    "Intentos_Totales": 26.0,
-                    "Intentos_Por_Registro": 8.67,
-                    "Contactos": 3.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR--",
-                    "Gestion": 3,
-                    "Intentos_Totales": 4.0,
-                    "Intentos_Por_Registro": 1.33,
-                    "Contactos": 3.0,
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-TIGO",
+                    "Gestion": 4,
+                    "Intentos_Totales": 34.0,
+                    "Intentos_Por_Registro": 8.5,
+                    "Contactos": 4.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-MALA EXPERIENCIA CON PROCESOS DE CLARO-",
                     "Gestion": 3,
-                    "Intentos_Totales": 24.0,
-                    "Intentos_Por_Registro": 8.0,
-                    "Contactos": 2.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-MEJORES PROMOCIONES-TIGO",
-                    "Gestion": 3,
-                    "Intentos_Totales": 23.0,
-                    "Intentos_Por_Registro": 7.67,
-                    "Contactos": 3.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-APLICA CIUDAD PERO NO HAY COBERTURA BI",
-                    "Gestion": 2,
-                    "Intentos_Totales": 20.0,
+                    "Intentos_Totales": 30.0,
                     "Intentos_Por_Registro": 10.0,
                     "Contactos": 2.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE YA TRAMITADO POR OTRO USUARIO",
-                    "Gestion": 2,
-                    "Intentos_Totales": 19.0,
-                    "Intentos_Por_Registro": 9.5,
-                    "Contactos": 2.0,
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-RED NEUTRA",
+                    "Gestion": 3,
+                    "Intentos_Totales": 30.0,
+                    "Intentos_Por_Registro": 10.0,
+                    "Contactos": 3.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-MEJORES PROMOCIONES-MOVISTAR",
-                    "Gestion": 2,
-                    "Intentos_Totales": 23.0,
-                    "Intentos_Por_Registro": 11.5,
-                    "Contactos": 2.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-MEJORES PROMOCIONES-PARABOLICA  // CABLERAS",
-                    "Gestion": 2,
-                    "Intentos_Totales": 16.0,
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE DESCONFIA DE TRAMITES\u00a0 TELEFONICOS",
+                    "Gestion": 3,
+                    "Intentos_Totales": 24.0,
                     "Intentos_Por_Registro": 8.0,
+                    "Contactos": 3.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-MEJORES PROMOCIONES-SOMOS",
+                    "Gestion": 3,
+                    "Intentos_Totales": 37.0,
+                    "Intentos_Por_Registro": 12.33,
+                    "Contactos": 3.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE CORPORATIVO",
+                    "Gestion": 2,
+                    "Intentos_Totales": 22.0,
+                    "Intentos_Por_Registro": 11.0,
+                    "Contactos": 2.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-APLICA CIUDAD PERO NO HAY COBERTURA BI",
+                    "Gestion": 2,
+                    "Intentos_Totales": 21.0,
+                    "Intentos_Por_Registro": 10.5,
                     "Contactos": 2.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -919,16 +847,7 @@
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE PRODUCTO FINANCIADO CON FACTURA DE TERCERO",
-                    "Gestion": 2,
-                    "Intentos_Totales": 18.0,
-                    "Intentos_Por_Registro": 9.0,
-                    "Contactos": 2.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-SIN COBERTURA-DTH",
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-MEJORES PROMOCIONES-MOVISTAR",
                     "Gestion": 2,
                     "Intentos_Totales": 23.0,
                     "Intentos_Por_Registro": 11.5,
@@ -937,19 +856,19 @@
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE CANCELO ANTES DE 90 DIAS",
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR--",
                     "Gestion": 2,
-                    "Intentos_Totales": 14.0,
-                    "Intentos_Por_Registro": 7.0,
+                    "Intentos_Totales": 3.0,
+                    "Intentos_Por_Registro": 1.5,
                     "Contactos": 2.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO",
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-YA TIENE INTERNET",
                     "Gestion": 2,
-                    "Intentos_Totales": 15.0,
-                    "Intentos_Por_Registro": 7.5,
+                    "Intentos_Totales": 23.0,
+                    "Intentos_Por_Registro": 11.5,
                     "Contactos": 2.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -957,8 +876,17 @@
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CAPACIDAD DE PAGO-CUOTA INICIAL",
                     "Gestion": 1,
-                    "Intentos_Totales": 13.0,
-                    "Intentos_Por_Registro": 13.0,
+                    "Intentos_Totales": 17.0,
+                    "Intentos_Por_Registro": 17.0,
+                    "Contactos": 1.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO",
+                    "Gestion": 1,
+                    "Intentos_Totales": 11.0,
+                    "Intentos_Por_Registro": 11.0,
                     "Contactos": 1.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -966,8 +894,17 @@
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-DESEA MAS VELOCIDAD-",
                     "Gestion": 1,
-                    "Intentos_Totales": 10.0,
-                    "Intentos_Por_Registro": 10.0,
+                    "Intentos_Totales": 12.0,
+                    "Intentos_Por_Registro": 12.0,
+                    "Contactos": 1.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "NO_CONTACTOS-CONTESTADOR",
+                    "Gestion": 1,
+                    "Intentos_Totales": 11.0,
+                    "Intentos_Por_Registro": 11.0,
                     "Contactos": 0.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -982,16 +919,16 @@
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "NO_CONTACTOS-OTROS TONOS",
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-TUVO INTERNET HACE MENOS DE 6 MESES",
                     "Gestion": 1,
                     "Intentos_Totales": 10.0,
                     "Intentos_Por_Registro": 10.0,
-                    "Contactos": 0.0,
+                    "Contactos": 1.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-ETB",
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CON TARIFA DE RETENCI\u00d3N ACTIVA",
                     "Gestion": 1,
                     "Intentos_Totales": 7.0,
                     "Intentos_Por_Registro": 7.0,
@@ -1000,19 +937,10 @@
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-CON TARIFA DE RETENCI\u00d3N ACTIVA",
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-MEJORES PROMOCIONES-PARABOLICA  // CABLERAS",
                     "Gestion": 1,
-                    "Intentos_Totales": 6.0,
-                    "Intentos_Por_Registro": 6.0,
-                    "Contactos": 1.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO ACEPTA DTH-CAPACIDAD INTERNET",
-                    "Gestion": 1,
-                    "Intentos_Totales": 6.0,
-                    "Intentos_Por_Registro": 6.0,
+                    "Intentos_Totales": 8.0,
+                    "Intentos_Por_Registro": 8.0,
                     "Contactos": 1.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -1020,8 +948,8 @@
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-VENTA -CONVERGENTE",
                     "Gestion": 1,
-                    "Intentos_Totales": 10.0,
-                    "Intentos_Por_Registro": 10.0,
+                    "Intentos_Totales": 11.0,
+                    "Intentos_Por_Registro": 11.0,
                     "Contactos": 1.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -1029,8 +957,17 @@
                 {
                     "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-VENTA -ADICIONALES / UPSELLING",
                     "Gestion": 1,
-                    "Intentos_Totales": 6.0,
-                    "Intentos_Por_Registro": 6.0,
+                    "Intentos_Totales": 9.0,
+                    "Intentos_Por_Registro": 9.0,
+                    "Contactos": 1.0,
+                    "Ventas": 0.0,
+                    "Efectividad_Porcentaje": 0.0
+                },
+                {
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE PRODUCTO FINANCIADO CON FACTURA DE TERCERO",
+                    "Gestion": 1,
+                    "Intentos_Totales": 11.0,
+                    "Intentos_Por_Registro": 11.0,
                     "Contactos": 1.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -1045,28 +982,19 @@
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-INTERNET-",
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-PERMANENCIA ACTIVA CON OTRO OPERADOR--",
                     "Gestion": 1,
-                    "Intentos_Totales": 13.0,
-                    "Intentos_Por_Registro": 13.0,
+                    "Intentos_Totales": 10.0,
+                    "Intentos_Por_Registro": 10.0,
                     "Contactos": 1.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
                 },
                 {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-PERMANENCIA ACTIVA CON OTRO OPERADOR--",
+                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-INTERNET-",
                     "Gestion": 1,
-                    "Intentos_Totales": 8.0,
-                    "Intentos_Por_Registro": 8.0,
-                    "Contactos": 0.0,
-                    "Ventas": 0.0,
-                    "Efectividad_Porcentaje": 0.0
-                },
-                {
-                    "Tipificacion_Alarma": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-VOZ",
-                    "Gestion": 1,
-                    "Intentos_Totales": 8.0,
-                    "Intentos_Por_Registro": 8.0,
+                    "Intentos_Totales": 14.0,
+                    "Intentos_Por_Registro": 14.0,
                     "Contactos": 1.0,
                     "Ventas": 0.0,
                     "Efectividad_Porcentaje": 0.0
@@ -1078,34 +1006,34 @@
                     "Nombres_Apellidos": "Angie Juliana Avendano Lopez",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 2307
+                    "Cantidad": 2483
                 },
                 {
                     "Documento": "1028861406",
                     "Nombres_Apellidos": "Angie Juliana Avendano Lopez",
                     "Posicion": 2,
-                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
                     "Cantidad": 20
                 },
                 {
                     "Documento": "1028861406",
                     "Nombres_Apellidos": "Angie Juliana Avendano Lopez",
                     "Posicion": 3,
-                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 16
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO POR NO SER CLIENTE CLARO-",
+                    "Cantidad": 20
                 },
                 {
                     "Documento": "1028861406",
                     "Nombres_Apellidos": "Angie Juliana Avendano Lopez",
                     "Posicion": 4,
-                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-INTERNET",
-                    "Cantidad": 12
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR",
+                    "Cantidad": 14
                 },
                 {
                     "Documento": "1028861406",
                     "Nombres_Apellidos": "Angie Juliana Avendano Lopez",
                     "Posicion": 5,
-                    "Tipificacion": "CONTACTOS_EFECTIVOS-VENTA-FIJO",
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-INTERNET",
                     "Cantidad": 12
                 },
                 {
@@ -1148,42 +1076,42 @@
                     "Nombres_Apellidos": "Christian Andres Myers Barreto",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 2442
+                    "Cantidad": 2446
                 },
                 {
                     "Documento": "1031171188",
                     "Nombres_Apellidos": "Christian Andres Myers Barreto",
                     "Posicion": 2,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 566
+                    "Cantidad": 739
                 },
                 {
                     "Documento": "1031171188",
                     "Nombres_Apellidos": "Christian Andres Myers Barreto",
                     "Posicion": 3,
                     "Tipificacion": "NO_CONTACTOS-NO CONTESTAN",
-                    "Cantidad": 74
+                    "Cantidad": 76
                 },
                 {
                     "Documento": "1031171188",
                     "Nombres_Apellidos": "Christian Andres Myers Barreto",
                     "Posicion": 4,
-                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR",
-                    "Cantidad": 42
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE SERVICIO EN MISMA DIRECCION A NOMBRE DE OTRA PERSONA",
+                    "Cantidad": 44
                 },
                 {
                     "Documento": "1031171188",
                     "Nombres_Apellidos": "Christian Andres Myers Barreto",
                     "Posicion": 5,
-                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE SERVICIO EN MISMA DIRECCION A NOMBRE DE OTRA PERSONA",
-                    "Cantidad": 40
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR",
+                    "Cantidad": 43
                 },
                 {
                     "Documento": "1001286024",
                     "Nombres_Apellidos": "Diego Andres Munoz Ramirez",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 1218
+                    "Cantidad": 1357
                 },
                 {
                     "Documento": "1001286024",
@@ -1197,21 +1125,21 @@
                     "Nombres_Apellidos": "Diego Andres Munoz Ramirez",
                     "Posicion": 3,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 527
+                    "Cantidad": 528
                 },
                 {
                     "Documento": "1001286024",
                     "Nombres_Apellidos": "Diego Andres Munoz Ramirez",
                     "Posicion": 4,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-MEJORES PROMOCIONES-SOMOS",
-                    "Cantidad": 30
+                    "Cantidad": 36
                 },
                 {
                     "Documento": "1001286024",
                     "Nombres_Apellidos": "Diego Andres Munoz Ramirez",
                     "Posicion": 5,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-RED NEUTRA",
-                    "Cantidad": 17
+                    "Cantidad": 18
                 },
                 {
                     "Documento": "1016833613",
@@ -1253,28 +1181,28 @@
                     "Nombres_Apellidos": "Ingrid Julieth Huertas Morales",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 2012
+                    "Cantidad": 2101
                 },
                 {
                     "Documento": "1014229143",
                     "Nombres_Apellidos": "Ingrid Julieth Huertas Morales",
                     "Posicion": 2,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR",
-                    "Cantidad": 151
+                    "Cantidad": 175
                 },
                 {
                     "Documento": "1014229143",
                     "Nombres_Apellidos": "Ingrid Julieth Huertas Morales",
                     "Posicion": 3,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE SERVICIO EN MISMA DIRECCION A NOMBRE DE OTRA PERSONA",
-                    "Cantidad": 96
+                    "Cantidad": 113
                 },
                 {
                     "Documento": "1014229143",
                     "Nombres_Apellidos": "Ingrid Julieth Huertas Morales",
                     "Posicion": 4,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 90
+                    "Cantidad": 95
                 },
                 {
                     "Documento": "1014229143",
@@ -1288,35 +1216,35 @@
                     "Nombres_Apellidos": "Isabel Cardona Rodriguez",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 1319
+                    "Cantidad": 1350
                 },
                 {
                     "Documento": "51631845",
                     "Nombres_Apellidos": "Isabel Cardona Rodriguez",
                     "Posicion": 2,
                     "Tipificacion": "NO_CONTACTOS-NO CONTESTAN",
-                    "Cantidad": 336
+                    "Cantidad": 384
                 },
                 {
                     "Documento": "51631845",
                     "Nombres_Apellidos": "Isabel Cardona Rodriguez",
                     "Posicion": 3,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 302
+                    "Cantidad": 337
                 },
                 {
                     "Documento": "51631845",
                     "Nombres_Apellidos": "Isabel Cardona Rodriguez",
                     "Posicion": 4,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE SERVICIO EN MISMA DIRECCION A NOMBRE DE OTRA PERSONA",
-                    "Cantidad": 107
+                    "Cantidad": 115
                 },
                 {
                     "Documento": "51631845",
                     "Nombres_Apellidos": "Isabel Cardona Rodriguez",
                     "Posicion": 5,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-INTERNET",
-                    "Cantidad": 84
+                    "Cantidad": 92
                 },
                 {
                     "Documento": "1026255962",
@@ -1358,28 +1286,28 @@
                     "Nombres_Apellidos": "Joalcid Fabian Fonseca Lopez",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 1643
+                    "Cantidad": 1651
                 },
                 {
                     "Documento": "1006890747",
                     "Nombres_Apellidos": "Joalcid Fabian Fonseca Lopez",
                     "Posicion": 2,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 277
+                    "Cantidad": 347
                 },
                 {
                     "Documento": "1006890747",
                     "Nombres_Apellidos": "Joalcid Fabian Fonseca Lopez",
                     "Posicion": 3,
                     "Tipificacion": "NO_CONTACTOS-NO CONTESTAN",
-                    "Cantidad": 109
+                    "Cantidad": 130
                 },
                 {
                     "Documento": "1006890747",
                     "Nombres_Apellidos": "Joalcid Fabian Fonseca Lopez",
                     "Posicion": 4,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE SERVICIO EN MISMA DIRECCION A NOMBRE DE OTRA PERSONA",
-                    "Cantidad": 41
+                    "Cantidad": 46
                 },
                 {
                     "Documento": "1006890747",
@@ -1393,28 +1321,28 @@
                     "Nombres_Apellidos": "Johana Alejandra Fula Barrantes",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 1964
+                    "Cantidad": 2039
                 },
                 {
                     "Documento": "1233500864",
                     "Nombres_Apellidos": "Johana Alejandra Fula Barrantes",
                     "Posicion": 2,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 636
+                    "Cantidad": 680
                 },
                 {
                     "Documento": "1233500864",
                     "Nombres_Apellidos": "Johana Alejandra Fula Barrantes",
                     "Posicion": 3,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-INTERNET",
-                    "Cantidad": 480
+                    "Cantidad": 536
                 },
                 {
                     "Documento": "1233500864",
                     "Nombres_Apellidos": "Johana Alejandra Fula Barrantes",
                     "Posicion": 4,
                     "Tipificacion": "NO_CONTACTOS-NO CONTESTAN",
-                    "Cantidad": 342
+                    "Cantidad": 359
                 },
                 {
                     "Documento": "1233500864",
@@ -1428,70 +1356,70 @@
                     "Nombres_Apellidos": "Jojhan Gerardo Cardenas Martinez",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 2665
+                    "Cantidad": 2835
                 },
                 {
                     "Documento": "1019902324",
                     "Nombres_Apellidos": "Jojhan Gerardo Cardenas Martinez",
                     "Posicion": 2,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 19
+                    "Cantidad": 20
                 },
                 {
                     "Documento": "1019902324",
                     "Nombres_Apellidos": "Jojhan Gerardo Cardenas Martinez",
                     "Posicion": 3,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-VENTA-FIJO",
-                    "Cantidad": 12
+                    "Cantidad": 13
                 },
                 {
                     "Documento": "1019902324",
                     "Nombres_Apellidos": "Jojhan Gerardo Cardenas Martinez",
                     "Posicion": 4,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-SIN COBERTURA-BI",
-                    "Cantidad": 9
+                    "Cantidad": 10
                 },
                 {
                     "Documento": "1019902324",
                     "Nombres_Apellidos": "Jojhan Gerardo Cardenas Martinez",
                     "Posicion": 5,
                     "Tipificacion": "NO_CONTACTOS-TELEFONO OCUPADO---",
-                    "Cantidad": 7
+                    "Cantidad": 10
                 },
                 {
                     "Documento": "1141714368",
                     "Nombres_Apellidos": "Joseanny Paola Sanchez Vera",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 184
+                    "Cantidad": 217
                 },
                 {
                     "Documento": "1141714368",
                     "Nombres_Apellidos": "Joseanny Paola Sanchez Vera",
                     "Posicion": 2,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR",
-                    "Cantidad": 69
+                    "Cantidad": 101
                 },
                 {
                     "Documento": "1141714368",
                     "Nombres_Apellidos": "Joseanny Paola Sanchez Vera",
                     "Posicion": 3,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE SERVICIO EN MISMA DIRECCION A NOMBRE DE OTRA PERSONA",
-                    "Cantidad": 48
+                    "Cantidad": 68
                 },
                 {
                     "Documento": "1141714368",
                     "Nombres_Apellidos": "Joseanny Paola Sanchez Vera",
                     "Posicion": 4,
-                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-NO HAY CONTACTO CON EL TITULAR",
-                    "Cantidad": 30
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-TV",
+                    "Cantidad": 43
                 },
                 {
                     "Documento": "1141714368",
                     "Nombres_Apellidos": "Joseanny Paola Sanchez Vera",
                     "Posicion": 5,
                     "Tipificacion": "NO_CONTACTOS-NO CONTESTAN",
-                    "Cantidad": 25
+                    "Cantidad": 38
                 },
                 {
                     "Documento": "1024566650",
@@ -1525,7 +1453,7 @@
                     "Documento": "1024566650",
                     "Nombres_Apellidos": "Kimberly Viviana Lache Paez",
                     "Posicion": 5,
-                    "Tipificacion": "NO_CONTACTOS-TELEFONO OCUPADO---",
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE MINTIC-APLICA CIUDAD PERO NO HAY COBERTURA BI-",
                     "Cantidad": 1
                 },
                 {
@@ -1533,35 +1461,35 @@
                     "Nombres_Apellidos": "Liseth Daniela Fernandez",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 1411
+                    "Cantidad": 1438
                 },
                 {
                     "Documento": "1106782665",
                     "Nombres_Apellidos": "Liseth Daniela Fernandez",
                     "Posicion": 2,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 514
+                    "Cantidad": 616
                 },
                 {
                     "Documento": "1106782665",
                     "Nombres_Apellidos": "Liseth Daniela Fernandez",
                     "Posicion": 3,
                     "Tipificacion": "NO_CONTACTOS-NO CONTESTAN",
-                    "Cantidad": 134
+                    "Cantidad": 141
                 },
                 {
                     "Documento": "1106782665",
                     "Nombres_Apellidos": "Liseth Daniela Fernandez",
                     "Posicion": 4,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE SERVICIO EN MISMA DIRECCION A NOMBRE DE OTRA PERSONA",
-                    "Cantidad": 94
+                    "Cantidad": 102
                 },
                 {
                     "Documento": "1106782665",
                     "Nombres_Apellidos": "Liseth Daniela Fernandez",
                     "Posicion": 5,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-SIN COBERTURA-BI",
-                    "Cantidad": 38
+                    "Cantidad": 40
                 },
                 {
                     "Documento": "1015426915",
@@ -1603,28 +1531,28 @@
                     "Nombres_Apellidos": "Luanni Yeliana Fernandez Gonzalez",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 1856
+                    "Cantidad": 1912
                 },
                 {
                     "Documento": "6421245",
                     "Nombres_Apellidos": "Luanni Yeliana Fernandez Gonzalez",
                     "Posicion": 2,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 418
+                    "Cantidad": 449
                 },
                 {
                     "Documento": "6421245",
                     "Nombres_Apellidos": "Luanni Yeliana Fernandez Gonzalez",
                     "Posicion": 3,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-INTERNET",
-                    "Cantidad": 86
+                    "Cantidad": 89
                 },
                 {
                     "Documento": "6421245",
                     "Nombres_Apellidos": "Luanni Yeliana Fernandez Gonzalez",
                     "Posicion": 4,
                     "Tipificacion": "NO_CONTACTOS-NO CONTESTAN",
-                    "Cantidad": 79
+                    "Cantidad": 81
                 },
                 {
                     "Documento": "6421245",
@@ -1638,14 +1566,14 @@
                     "Nombres_Apellidos": "Luz Stella Mendez Mongui",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 1408
+                    "Cantidad": 1554
                 },
                 {
                     "Documento": "1024489981",
                     "Nombres_Apellidos": "Luz Stella Mendez Mongui",
                     "Posicion": 2,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 272
+                    "Cantidad": 279
                 },
                 {
                     "Documento": "1024489981",
@@ -1659,14 +1587,14 @@
                     "Nombres_Apellidos": "Luz Stella Mendez Mongui",
                     "Posicion": 4,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE SERVICIO EN MISMA DIRECCION A NOMBRE DE OTRA PERSONA",
-                    "Cantidad": 80
+                    "Cantidad": 86
                 },
                 {
                     "Documento": "1024489981",
                     "Nombres_Apellidos": "Luz Stella Mendez Mongui",
                     "Posicion": 5,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR",
-                    "Cantidad": 57
+                    "Cantidad": 62
                 },
                 {
                     "Documento": "1006822744",
@@ -1708,7 +1636,7 @@
                     "Nombres_Apellidos": "Mayra Alejandra Renteria Negrete",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 3321
+                    "Cantidad": 3546
                 },
                 {
                     "Documento": "1005663580",
@@ -1722,7 +1650,7 @@
                     "Nombres_Apellidos": "Mayra Alejandra Renteria Negrete",
                     "Posicion": 3,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 86
+                    "Cantidad": 106
                 },
                 {
                     "Documento": "1005663580",
@@ -1736,14 +1664,14 @@
                     "Nombres_Apellidos": "Mayra Alejandra Renteria Negrete",
                     "Posicion": 5,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR",
-                    "Cantidad": 24
+                    "Cantidad": 25
                 },
                 {
                     "Documento": "1027952240",
                     "Nombres_Apellidos": "Melissa Munoz Martinez",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 1600
+                    "Cantidad": 1726
                 },
                 {
                     "Documento": "1027952240",
@@ -1757,14 +1685,14 @@
                     "Nombres_Apellidos": "Melissa Munoz Martinez",
                     "Posicion": 3,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 211
+                    "Cantidad": 230
                 },
                 {
                     "Documento": "1027952240",
                     "Nombres_Apellidos": "Melissa Munoz Martinez",
                     "Posicion": 4,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR",
-                    "Cantidad": 179
+                    "Cantidad": 201
                 },
                 {
                     "Documento": "1027952240",
@@ -1778,21 +1706,21 @@
                     "Nombres_Apellidos": "Natalia Andrea Medina Aviles",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 2521
+                    "Cantidad": 2541
                 },
                 {
                     "Documento": "1077841231",
                     "Nombres_Apellidos": "Natalia Andrea Medina Aviles",
                     "Posicion": 2,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 213
+                    "Cantidad": 407
                 },
                 {
                     "Documento": "1077841231",
                     "Nombres_Apellidos": "Natalia Andrea Medina Aviles",
                     "Posicion": 3,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR",
-                    "Cantidad": 17
+                    "Cantidad": 25
                 },
                 {
                     "Documento": "1077841231",
@@ -1806,42 +1734,42 @@
                     "Nombres_Apellidos": "Natalia Andrea Medina Aviles",
                     "Posicion": 5,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-CLIENTE PIDE NO VOLVER A LLAMAR",
-                    "Cantidad": 3
+                    "Cantidad": 4
                 },
                 {
                     "Documento": "1073705944",
                     "Nombres_Apellidos": "Paula Andrea Leon Vivas",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 331
+                    "Cantidad": 414
                 },
                 {
                     "Documento": "1073705944",
                     "Nombres_Apellidos": "Paula Andrea Leon Vivas",
                     "Posicion": 2,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR",
-                    "Cantidad": 80
+                    "Cantidad": 106
                 },
                 {
                     "Documento": "1073705944",
                     "Nombres_Apellidos": "Paula Andrea Leon Vivas",
                     "Posicion": 3,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE SERVICIO EN MISMA DIRECCION A NOMBRE DE OTRA PERSONA",
-                    "Cantidad": 39
+                    "Cantidad": 54
                 },
                 {
                     "Documento": "1073705944",
                     "Nombres_Apellidos": "Paula Andrea Leon Vivas",
                     "Posicion": 4,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-SIN COBERTURA-BI",
-                    "Cantidad": 23
+                    "Cantidad": 33
                 },
                 {
                     "Documento": "1073705944",
                     "Nombres_Apellidos": "Paula Andrea Leon Vivas",
                     "Posicion": 5,
-                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-NO HAY CONTACTO CON EL TITULAR",
-                    "Cantidad": 22
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-PERMANENCIA ACTIVA CON OTRO OPERADOR",
+                    "Cantidad": 23
                 },
                 {
                     "Documento": "1025524704",
@@ -1883,56 +1811,35 @@
                     "Nombres_Apellidos": "Sara Valentina Cortes Rodriguez",
                     "Posicion": 1,
                     "Tipificacion": "CONTACTOS_NO_EFECTIVOS-CLIENTE CUELGA",
-                    "Cantidad": 228
+                    "Cantidad": 307
                 },
                 {
                     "Documento": "1000589019",
                     "Nombres_Apellidos": "Sara Valentina Cortes Rodriguez",
                     "Posicion": 2,
                     "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-INTERNET",
-                    "Cantidad": 50
+                    "Cantidad": 69
                 },
                 {
                     "Documento": "1000589019",
                     "Nombres_Apellidos": "Sara Valentina Cortes Rodriguez",
                     "Posicion": 3,
-                    "Tipificacion": "NO_CONTACTOS-NO CONTESTAN",
-                    "Cantidad": 36
+                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE SERVICIO EN MISMA DIRECCION A NOMBRE DE OTRA PERSONA",
+                    "Cantidad": 43
                 },
                 {
                     "Documento": "1000589019",
                     "Nombres_Apellidos": "Sara Valentina Cortes Rodriguez",
                     "Posicion": 4,
-                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR",
-                    "Cantidad": 34
+                    "Tipificacion": "NO_CONTACTOS-NO CONTESTAN",
+                    "Cantidad": 41
                 },
                 {
                     "Documento": "1000589019",
                     "Nombres_Apellidos": "Sara Valentina Cortes Rodriguez",
                     "Posicion": 5,
-                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-YA TIENE SERVICIO EN MISMA DIRECCION A NOMBRE DE OTRA PERSONA",
-                    "Cantidad": 27
-                },
-                {
-                    "Documento": "1001097179",
-                    "Nombres_Apellidos": "Sergio Eduardo Rojas Duarte",
-                    "Posicion": 1,
-                    "Tipificacion": "CONTACTOS_EFECTIVOS-NO VENTA-NO LE PARECE ATRACTIVA LA OFERTA-PRECIO-OTROS",
-                    "Cantidad": 655
-                },
-                {
-                    "Documento": "1001097179",
-                    "Nombres_Apellidos": "Sergio Eduardo Rojas Duarte",
-                    "Posicion": 2,
-                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR---",
-                    "Cantidad": 6
-                },
-                {
-                    "Documento": "1001097179",
-                    "Nombres_Apellidos": "Sergio Eduardo Rojas Duarte",
-                    "Posicion": 3,
-                    "Tipificacion": "CONTACTOS_EFECTIVOS-VENTA-FIJO--",
-                    "Cantidad": 1
+                    "Tipificacion": "CONTACTOS_NO_EFECTIVOS-VOLVER A LLAMAR",
+                    "Cantidad": 38
                 },
                 {
                     "Documento": "1005412447",
